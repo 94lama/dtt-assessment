@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { useRouter } from 'vue-router';
+import logo from '@/assets/images/img_logo_dtt@3x.png';
 
 const router = useRouter();
 </script>
@@ -8,7 +9,7 @@ const router = useRouter();
 <template>
   <nav>
     <div class="navbar">
-        <img class="logo" src="/img_logo_dtt@3x.png" alt="DTT logo" />
+        <img class="logo" :src="logo" alt="DTT logo" />
         <RouterLink to="/" >Houses</RouterLink>
         <RouterLink to="/about" >About</RouterLink>
     </div>
