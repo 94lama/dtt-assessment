@@ -7,25 +7,36 @@ defineProps([
     'search', 'type', 'placeholder',
 ])
 
-const searchValue = ref('qwe');
+const searchValue = ref('');
 
 </script>
 
 <template>
-    <div class="search">
-        <button @click="$emit('emitInput', searchValue)">
-            <img :src="searchIcon" alt="search icon">
-        </button>
-        <input :type="type" :placeholder="placeholder" v-model="searchValue" >
-        <img v-if="searchValue" :src="deleteSearch" alt="delete icon" @click="() => searchValue=''" class="icon">
+    <div class="search-component">
+        <img :src="searchIcon" alt="search icon" class="search icon">
+        <input :type="type" :placeholder="placeholder" v-model="searchValue" @keyup="$emit('emitInput', searchValue)">
+        <img v-if="searchValue" :src="deleteSearch" alt="delete icon" @click="() => {
+            searchValue='';
+            $emit('emitInput', searchValue)
+            }" class="icon delete">
     </div>
 </template>
 
 <style scoped>
-.search{
+.search-component{
     display: flex;
     padding: 10px;
     border-radius: 5px;
+    width: 100%;
+    border-radius: 5px 0 0 5px;
+}
+
+.search{
+    border-radius: 5px 0 0 5px;
+}
+
+.delete {
+    border-radius: 0 5px 5px 0;
 }
 
 input {
@@ -36,16 +47,6 @@ input {
     padding: 5px;
 }
 
-button {
-    height: 30px;
-    padding: 10px 10px 10px 20px;
-    border-radius: 5px 0 0 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--tertiary-dark);
-}
-
 img {
     background-color: var(--tertiary-dark);
     height: 20px;
@@ -53,8 +54,8 @@ img {
 
 .icon{
     height: 20px;
-    padding: 5px 20px 5px 10px;
-    border-radius: 0 5px 5px 0;
+    width: 20px;
+    padding: 5px 20px 5px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
