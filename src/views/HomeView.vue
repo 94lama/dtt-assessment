@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { useFetch } from '@vueuse/core';
 import Card from '@/components/Card.vue';
 import Search from '@/components/Search.vue';
+import Sort from '@/components/Sort.vue';
 import noResultsImage from '@/assets/images/img_empty_houses@3x.png';
 
 const { isFetching, data, error } = useFetch('https://api.intern.d-tt.nl/api/houses', {
@@ -14,18 +15,15 @@ const { isFetching, data, error } = useFetch('https://api.intern.d-tt.nl/api/hou
 
 const houses = computed(() => JSON.parse(data.value));
 const searchString = ref('');
+const sortFilter = ref('price');
 
 const filteredHouses = computed(() => {
   const output = houses.value;
-  console.log('houses: ', output, '\n Searched value: ', searchString.value)
+  console.log('houses: ', output, '\n Searched value: ', searchString.value, '\n Sort by: ', sortFilter.value);
   return output.filter((house) => house.location.city.toLowerCase().includes(searchString.value))
+    .sort((a, b) => a[sortFilter.value] - b[sortFilter.value]);
 });
 
-function searchInput(value) {
-  console.log('Value received: ', value);
-  searchString.value = value;
-  console.log(searchInput)
-}
 </script>
 
 <template>
@@ -33,13 +31,16 @@ function searchInput(value) {
     Loading...
   </div>
   <div v-else-if="data" class="main">
-    <Search @emitInput="(value) => { searchString = value; console.log(value) }" type="text" placeholder="Search for a house" />
+    <div class="queries flex between">
+      <Search @emitInput="(value) => { searchString = value; console.log('Search value changed to: ', value) }" type="text" placeholder="Search for a house" />
+      <Sort @emitSorter="(value) => { sortFilter = value; console.log('Sort value changed to: ', value) }" />
+    </div>
     <div v-if="filteredHouses.length === 0" class="flex column center">
       <img :src="noResultsImage" alt="no results image">
       <h3>No houses found</h3>
       <h3>Please try another keyword.</h3>
     </div>
-    <div v-if="filteredHouses.length > 0" class="align-left">
+    <div v-if="filteredHouses.length > 0 && searchString" class="align-left">
       <h3>
         {{ filteredHouses.length }} results found
       </h3>
@@ -63,5 +64,12 @@ img {
   width: 100%;
   height: 100%;
   margin-bottom: 20px;
+}
+
+.queries {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
 }
 </style>

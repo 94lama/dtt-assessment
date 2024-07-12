@@ -143,6 +143,11 @@ button:focus-visible {
   align-items: center;
 }
 
+.between{
+  width: 100%;
+  justify-content: space-between;
+}
+
 .m-0 {
   margin: 5px;
 }

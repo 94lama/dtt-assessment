@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
     image: String,
-    value: String
+    value: Number
 })
 
 </script>

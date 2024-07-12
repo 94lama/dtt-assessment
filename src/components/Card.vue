@@ -4,6 +4,11 @@ import defaultImage from '@/assets/images/img_placeholder_house@3x.png';
 import bedIcon from '@/assets/images/ic_bed@3x.png';
 import bathIcon from '@/assets/images/ic_bath@3x.png';
 import sizeIcon from '@/assets/images/ic_size@3x.png';
+import { RouterLink } from 'vue-router';
+import { useRouter } from 'vue-router';
+
+
+const router = useRouter();
 
 defineProps({
     id: Number,
@@ -21,7 +26,9 @@ defineProps({
 
 <template>
     <div class="card" id={{id}}>
-        <img :src="image ?? defaultImage" alt="House image" class="image">
+        <RouterLink :to="'/houses/'+id">
+            <img :src="image ?? defaultImage" alt="House image" class="image">
+        </RouterLink>
         <div class="content">
             <h3 class="m-0">{{ location.street + ' ' + location.houseNumber }}</h3>
             <h4 class="m-0">€ {{ price }}</h4>

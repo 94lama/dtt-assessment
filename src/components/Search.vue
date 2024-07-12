@@ -24,10 +24,14 @@ const searchValue = ref('');
 
 <style scoped>
 .search-component{
+    position: relative;
     display: flex;
-    padding: 10px;
+    padding: 0;
     border-radius: 5px;
     width: 100%;
+    max-width: 300px;
+    height: 40px;
+    margin: 10px;
     border-radius: 5px 0 0 5px;
 }
 
@@ -36,6 +40,8 @@ const searchValue = ref('');
 }
 
 .delete {
+    position: absolute;
+    right: 0;
     border-radius: 0 5px 5px 0;
 }
 
@@ -45,6 +51,7 @@ input {
     width: 100%;
     height: 20px;
     padding: 5px;
+    border-radius: 0 5px 5px 0;
 }
 
 img {
@@ -55,10 +62,16 @@ img {
 .icon{
     height: 20px;
     width: 20px;
-    padding: 5px 20px 5px 20px;
+    padding: 5px 10px 5px 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--tertiary-dark);
+}
+
+@media screen and (max-width: 600px) {
+    .search-component {
+        max-width: var(--width);
+    }
 }
 </style>

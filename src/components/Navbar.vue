@@ -26,6 +26,7 @@ nav {
     background-color: var(--background2);
     justify-content: center;
     align-items: center;
+    z-index: 999;
 }
 
 .navbar {
