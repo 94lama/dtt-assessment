@@ -18,9 +18,14 @@ const searchString = ref('');
 const sortFilter = ref('price');
 
 const filteredHouses = computed(() => {
+	
   const output = houses.value;
   console.log('houses: ', output, '\n Searched value: ', searchString.value, '\n Sort by: ', sortFilter.value);
-  return output.filter((house) => house.location.city.toLowerCase().includes(searchString.value))
+
+	// Filtering the results before sorting helps reducing the overall compiling time. 
+	// The method includes allows to remove the errors given if searchString is null.
+  return output
+		.filter((house) => house.location.city.toLowerCase().includes(searchString.value))
     .sort((a, b) => a[sortFilter.value] - b[sortFilter.value]);
 });
 
