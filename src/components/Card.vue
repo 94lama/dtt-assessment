@@ -1,5 +1,6 @@
 <script setup>
-import CardIcons from '@/components/card/CardIcons.vue';
+import EditYourListing from '@/components/EditYourListing.vue';
+import HousePropsIcon from '@/components/HousePropsIcon.vue';
 import defaultImage from '@/assets/images/img_placeholder_house@3x.png';
 import bedIcon from '@/assets/images/ic_bed@3x.png';
 import bathIcon from '@/assets/images/ic_bath@3x.png';
@@ -21,22 +22,26 @@ defineProps({
     location: String,
     constructionYear: Number,
     hasGarage: Boolean,
+    madeByMe: Boolean
 })
 </script>
 
 <template>
     <div class="card" id={{id}}>
-        <RouterLink :to="'/houses/'+id">
+        <RouterLink :to="'/houses/' + id">
             <img :src="image ?? defaultImage" alt="House image" class="image">
         </RouterLink>
-        <div class="content">
-            <h3 class="m-0">{{ location.street + ' ' + location.houseNumber }}</h3>
+        <div class="content w-100">
+            <div class="flex between">
+                <h3 class="m-0">{{ location.street + ' ' + location.houseNumber }}</h3>
+                <EditYourListing :id="id" v-if="madeByMe"></EditYourListing>
+            </div>
             <h4 class="m-0">€ {{ price }}</h4>
             <h5 class="m-0">{{ location.zip + ' ' + location.city }}</h5>
-            <div class="flex center">
-                <CardIcons :value="rooms.bedrooms" :image="bedIcon" />
-                <CardIcons :value="rooms.bathrooms" :image="bathIcon" />
-                <CardIcons :value="size + ' m2'" :image="sizeIcon" />
+            <div class="flex">
+                <HousePropsIcon :value="rooms.bedrooms" :image="bedIcon" />
+                <HousePropsIcon :value="rooms.bathrooms" :image="bathIcon" />
+                <HousePropsIcon :value="size + ' m2'" :image="sizeIcon" />
             </div>
         </div>
     </div>
@@ -67,5 +72,4 @@ defineProps({
     align-items: left;
     text-align: left;
 }
-
 </style>

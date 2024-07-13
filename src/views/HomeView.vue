@@ -45,7 +45,7 @@ const filteredHouses = computed(() => {
         {{ filteredHouses.length }} results found
       </h3>
     </div>
-    <Card v-for="house in filteredHouses" :id="house.id" :key="house.id" :image="house.image" :price="house.price" :rooms="house.rooms" :size="house.size" :description="house.description" :location="house.location" :constructionYear="house.constructionYear" :hasGarage="house.hasGarage" @click="$router.push(`/houses/${house.id}`)">
+    <Card v-for="house in filteredHouses" :id="house.id" :key="house.id" :image="house.image" :price="house.price" :rooms="house.rooms" :size="house.size" :description="house.description" :location="house.location" :constructionYear="house.constructionYear" :hasGarage="house.hasGarage" :madeByMe="house.madeByMe" @click="$router.push(`/houses/${house.id}`)">
     </Card>
   </div>
   <div v-else>

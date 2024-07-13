@@ -1,15 +1,16 @@
 <script setup>
 defineProps({
     image: String,
-    value: Number
+    value: Number,
+    fontClassSize: {type: String, required: false},
 })
 
 </script>
 
 <template>
     <div class="card-icon m-0" id={{id}}>
-        <img :src="image ?? defaultImage" alt="House image" class="image">
-        <p>{{ value }}</p>
+        <img :src="image" alt="House image">
+        <p :class="fontClassSize">{{ value }}</p>
     </div>
 </template>
 
@@ -22,8 +23,8 @@ defineProps({
     height: 20px;
 }
 
-.image {
-    height: 15px;
+img {
+    height: 25px;
     object-fit: cover;
 }
 </style>

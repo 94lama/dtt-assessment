@@ -1,11 +1,21 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useFetch } from '@vueuse/core';
-import Card from '@/components/Card.vue';
-import Search from '@/components/Search.vue';
-import noResultsImage from '@/assets/images/img_empty_houses@3x.png';
+import HousePropsIcon from '@/components/HousePropsIcon.vue';
+import { useRouter } from 'vue-router';
 
-const { isFetching, data, error } = useFetch('https://api.intern.d-tt.nl/api/houses/'+$route.params.id, {
+const router = useRouter();
+
+import locationIcon from '@/assets/images/ic_location@3x.png';
+import priceIcon from '@/assets/images/ic_price@3x.png';
+import sizeIcon from '@/assets/images/ic_size@3x.png';
+import constructionYearIcon from '@/assets/images/ic_construction_date@3x.png';
+import bedIcon from '@/assets/images/ic_bed@3x.png';
+import bathIcon from '@/assets/images/ic_bath@3x.png';
+import garageIcon from '@/assets/images/ic_garage@3x.png';
+
+
+const { isFetching, data, error } = useFetch(`https://api.intern.d-tt.nl/api/houses/${router.currentRoute.value.params.id}`, {
   method: 'GET',
   headers: { 
     'X-Api-Key': '1owkyeAxJYWi-8EjqbgQ5IK_OLT2VGHC'
@@ -14,35 +24,48 @@ const { isFetching, data, error } = useFetch('https://api.intern.d-tt.nl/api/hou
 
 const house = computed(() => JSON.parse(data.value));
 
-function searchInput (value){
-  console.log('Value received: ', value);
-  searchString.value = value;
-  console.log(searchInput)
+function deleteListing(id){
+  alert('Are you sure that you want to delete this listing?')
 }
 </script>
 
 <template>
-    <Card
-      :id = "house.id"
-      :key="house.id"
-      :image = "house.image"
-      :price = "house.price"
-      :rooms = "house.rooms"
-      :size = "house.size"
-      :description = "house.description"
-      :location = "house.location"
-      :constructionYear = "house.constructionYear"
-      :hasGarage = "house.hasGarage"
-      @click="$router.push(`/houses/${house.id}`)"
-      >
-    </Card>
+  <div v-if="isFetching">Loading...</div>
+  <div v-else-if="data" class="container flex column">
+    <img :src="house[0].image">
+    <div class="text-black w-90">
+      <div class="flex center between col-gap">
+        <h2>{{ house[0].location.street }}</h2>
+        <div class="flex col-gap" v-if="house[0].madeByMe">
+          <RouterLink :to="'/houses/' + house[0].id + '/edit'"><img :src="editIcon" class="icon"></RouterLink>
+          <a href="/" @click="deleteListing"><img :src='deleteIcon' class="icon"></a>
+        </div>
+      </div>
+      <div class="flex column row-gap">
+        <HousePropsIcon :image="locationIcon" :value="house[0].location.zip + ' ' + house[0].location.city"/>
+        <div class="flex col-gap">
+          <HousePropsIcon :image="priceIcon" :value="house[0].price"/>
+          <HousePropsIcon :image="sizeIcon" :value="house[0].size"/>
+          <HousePropsIcon :image="constructionYearIcon" :value="house[0].constructionYear"/>
+        </div>
+        <div class="flex col-gap">
+          <HousePropsIcon :image="bedIcon" :value="house[0].rooms.bedrooms"/>
+          <HousePropsIcon :image="bathIcon" :value="house[0].rooms.bathrooms"/>
+          <HousePropsIcon :image="garageIcon" :value="house[0].hasGarage?'Yes':'No'"/>
+        </div>
+        <p class='align-left'>{{ house[0].description }}</p>
+      </div>
+    </div>
+  </div>
+  <div v-else>{{ error }}</div>
 </template>
 
 <style scoped>
-.main {
-  display: flex;
-  flex-direction: column;
+.container {
+  width: var(--width);
   align-items: center;
+  background-color: var(--background2);
+  padding-bottom: 20px;
 }
 
 img {
