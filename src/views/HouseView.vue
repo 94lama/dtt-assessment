@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { useFetch } from '@vueuse/core';
 import HousePropsIcon from '@/components/HousePropsIcon.vue';
 import { useRouter } from 'vue-router';
+import EditListing from '@/components/EditListing.vue';
 
 const router = useRouter();
 
@@ -31,12 +32,9 @@ const house = computed(() => JSON.parse(data.value));
   <div v-else-if="data" class="container flex column">
     <img :src="house[0].image??defaultImage">
     <div class="text-black w-90">
-      <div class="flex center between col-gap">
+      <div class="flex align-center between col-gap">
         <h2>{{ house[0].location.street }}</h2>
-        <div class="flex col-gap" v-if="house[0].madeByMe">
-          <RouterLink :to="'/houses/' + house[0].id + '/edit'"><img :src="editIcon" class="icon"></RouterLink>
-          <a href="/" @click="deleteListing"><img :src='deleteIcon' class="icon"></a>
-        </div>
+        <EditListing></EditListing>
       </div>
       <div class="flex column row-gap">
         <HousePropsIcon :image="locationIcon" :value="house[0].location.zip + ' ' + house[0].location.city"/>

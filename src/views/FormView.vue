@@ -55,7 +55,7 @@ const patternCityInput = "\D";
 
       <Input placeholder="e.g. 1990" type="number" name="Construction date" @updateValue="(newValue) => constructionYear = newValue" :required="true" />
 
-      <Input placeholder="Enter description" textarea="textarea" name="description" @updateValue="(newValue) => description = newValue" :required="true" />
+      <Input placeholder="Enter description" type="textarea" name="description" @updateValue="(newValue) => description = newValue" :required="true" />
 
       <div class="flex w-100 flex-end">
         <button class="uppercase" @click.prevent="postHouse(

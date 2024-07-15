@@ -17,8 +17,8 @@ const isRequired = typeof required != 'undefined' ? true : false;
 let value = ref();
 
 function loadImage(event) {
-    value.value = URL.createObjectURL(event.target.files[0])
     emit('updateImage', value)
+    value.value = URL.createObjectURL(event.target.files[0])
 }
 </script>
 
@@ -26,7 +26,7 @@ function loadImage(event) {
     <!-- Textarea input -->
     <div class="flex column row-gap align-left text-left m-0 my-2 w-100" v-if="type === 'textarea'">
         <label :for="name">{{ name + (required ? ' *' : '') }}</label>
-        <textarea :id="name" :required="required" @keyup="$emit('updateValue', value)" v-model="value" :placeholder="placeholder"></textarea>
+        <textarea :id="name" rows='5' :required="required" @keyup="$emit('updateValue', value)" v-model="value" :placeholder="placeholder"></textarea>
         <span v-if="!value && required" class="error">Please add a value.</span>
     </div>
 

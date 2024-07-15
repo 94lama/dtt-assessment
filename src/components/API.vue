@@ -44,25 +44,25 @@ export function postHouse(city, houseNumber, houseNumberAddition, street, zip, i
 function postImage(id, image) {
     const formData = new FormData();
     formData.append('image', image);
-    console.log('form: ', formData)
 
     try {
         axios.post(`https://api.intern.d-tt.nl/api/houses/${id}/upload`, formData, {
             headers: {'Content-Type': 'multipart/form-data'},
         })
             .then(response => {
-                console.log('response: ', response)
-                return response.status < 300 ? response.data : null})
+                return response.status < 300 ? 
+                response.data :
+                null
+            })
     } catch (error) {
         console.error(error.response)
     }
 }
 
 export function deleteHouse(id) {
-    console.log('delete function called')
     try {
         axios.delete(`https://api.intern.d-tt.nl/api/houses/${id}`)
-        .then(response => response.status < 300 ? response.data : console.log(response))
+        .then(response => response.status < 300 ? router.go({name: 'home'}) : console.log(response))
     } catch (error) {
         console.error(error);
     }
