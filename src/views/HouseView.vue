@@ -13,6 +13,7 @@ import constructionYearIcon from '@/assets/images/ic_construction_date@3x.png';
 import bedIcon from '@/assets/images/ic_bed@3x.png';
 import bathIcon from '@/assets/images/ic_bath@3x.png';
 import garageIcon from '@/assets/images/ic_garage@3x.png';
+import defaultImage from '@/assets/images/img_placeholder_house@3x.png';
 
 
 const { isFetching, data, error } = useFetch(`https://api.intern.d-tt.nl/api/houses/${router.currentRoute.value.params.id}`, {
@@ -23,16 +24,12 @@ const { isFetching, data, error } = useFetch(`https://api.intern.d-tt.nl/api/hou
 });
 
 const house = computed(() => JSON.parse(data.value));
-
-function deleteListing(id){
-  alert('Are you sure that you want to delete this listing?')
-}
 </script>
 
 <template>
   <div v-if="isFetching">Loading...</div>
   <div v-else-if="data" class="container flex column">
-    <img :src="house[0].image">
+    <img :src="house[0].image??defaultImage">
     <div class="text-black w-90">
       <div class="flex center between col-gap">
         <h2>{{ house[0].location.street }}</h2>
@@ -53,7 +50,7 @@ function deleteListing(id){
           <HousePropsIcon :image="bathIcon" :value="house[0].rooms.bathrooms"/>
           <HousePropsIcon :image="garageIcon" :value="house[0].hasGarage?'Yes':'No'"/>
         </div>
-        <p class='align-left'>{{ house[0].description }}</p>
+        <p class='align-left text-left'>{{ house[0].description }}</p>
       </div>
     </div>
   </div>
@@ -62,10 +59,12 @@ function deleteListing(id){
 
 <style scoped>
 .container {
-  width: var(--width);
+  width: 100%;
+  max-width: var(--width);
   align-items: center;
   background-color: var(--background2);
   padding-bottom: 20px;
+  padding-top: 0;
 }
 
 img {

@@ -23,7 +23,6 @@ const sortValue = ref('price');
     display: grid;
     grid-auto-columns: 0.5fr 0.5fr;
     grid-auto-flow: column;
-    padding: 10px;
     border-radius: 5px;
     width: 100%;
     max-width: 200px;

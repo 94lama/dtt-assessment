@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-    <div class="card-icon m-0" id={{id}}>
+    <div class="card-icon m-1" id={{id}}>
         <img :src="image" alt="House image">
         <p :class="fontClassSize">{{ value }}</p>
     </div>

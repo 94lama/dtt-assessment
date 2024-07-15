@@ -31,7 +31,6 @@ const searchValue = ref('');
     width: 100%;
     max-width: 300px;
     height: 40px;
-    margin: 10px;
     border-radius: 5px 0 0 5px;
 }
 
@@ -49,19 +48,18 @@ input {
     background-color: var(--tertiary-dark);
     border: 0;
     width: 100%;
-    height: 20px;
-    padding: 5px;
+    padding: 0;
     border-radius: 0 5px 5px 0;
 }
 
 img {
     background-color: var(--tertiary-dark);
-    height: 20px;
+    height: 30px;
 }
 
 .icon{
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
     padding: 5px 10px 5px 10px;
     display: flex;
     align-items: center;
