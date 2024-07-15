@@ -44,7 +44,7 @@ postHouse('');
   <div v-else-if="data" class="main">
     <div class="flex w-100 align-center between">
       <h1>Houses</h1>
-      <RouterLink to="/houses/create" class="button uppercase"><img :src="addSymbol" class="icon"> Create new</RouterLink>
+      <RouterLink to="/house/create" class="button uppercase"><img :src="addSymbol" class="icon"> Create new</RouterLink>
     </div>
     <div class="queries flex between">
       <Search @emitInput="(value) => searchString = value" type="text" placeholder="Search for a house" />
@@ -93,4 +93,4 @@ img {
   width: 15px;
   margin: 0;
 }
-</style>
+</style>@/components/API.vue

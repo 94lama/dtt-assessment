@@ -1,6 +1,6 @@
 <script setup>
 import EditListing from '@/components/EditListing.vue';
-import HousePropsIcon from '@/components/HousePropsIcon.vue';
+import HouseDetailIcons from '@/components/HouseDetailIcons.vue';
 import defaultImage from '@/assets/images/img_placeholder_house@3x.png';
 import bedIcon from '@/assets/images/ic_bed@3x.png';
 import bathIcon from '@/assets/images/ic_bath@3x.png';
@@ -38,9 +38,9 @@ defineProps({
             <h4 class="m-1" @click="router.push('/houses/' + id)">€ {{ price }}</h4>
             <h5 class="m-1" @click="router.push('/houses/' + id)">{{ location.zip + ' ' + location.city }}</h5>
             <div class="flex" @click="router.push('/houses/' + id)">
-                <HousePropsIcon :value="rooms.bedrooms" :image="bedIcon" />
-                <HousePropsIcon :value="rooms.bathrooms" :image="bathIcon" />
-                <HousePropsIcon :value="size + ' m2'" :image="sizeIcon" />
+                <HouseDetailIcons :value="rooms.bedrooms" :image="bedIcon" />
+                <HouseDetailIcons :value="rooms.bathrooms" :image="bathIcon" />
+                <HouseDetailIcons :value="size + ' m2'" :image="sizeIcon" />
             </div>
         </div>
     </div>
@@ -51,7 +51,6 @@ defineProps({
     display: flex;
     flex-direction: row;
     border-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     background-color: var(--background2);
     padding: 1rem;
     margin: 1rem 0;

@@ -26,7 +26,7 @@ const router = createRouter({
       component: HouseView
     },
     {
-      path: '/houses/create',
+      path: '/house/create',
       name: 'create',
       component: FormView
     },

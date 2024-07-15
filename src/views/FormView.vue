@@ -1,10 +1,11 @@
 <script setup>
 import { computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { postHouse, getHouse } from '@/components/API.vue';
-import Input from '@/components/Input.vue'
+import { useRoute, useRouter } from 'vue-router';
+import Input from '@/components/Input.vue';
+import { postHouse } from '@/components/API.vue';
 
 const route = useRoute();
+const router = useRouter();
 
 // All the house values are linked to the relative Input component, in the Edit form version, the id allows to fetch info about the house and use the data as preset values.
 const city = ref();
@@ -19,60 +20,84 @@ const bedrooms = ref();
 const size = ref();
 const description = ref();
 const constructionYear = ref();
-const hasGarage = ref();
+const hasGarage = ref('False');
 
-const patternCityInput = "\D";
+const errors = ref([]);
+const notNumbers = /\d/g;
+
+function validateInputs(values = []) {
+  let validator = true;
+
+  for (let i = 0; i < values.length; i++) {
+    if (!values[i]) {
+      errors.value[i] = 'Required field missing.';
+      validator = false;
+    } else if ([0, 3].includes(i) && values[i].match(notNumbers)) {
+      errors.value[i] = 'This field can not contain numbers.';
+      validator = false;
+    } else errors.value[i] = '';
+  }
+
+  return validator
+}
+
+function postFormData(city, houseNumber, houseNumberAddition, street, zip, image, price, bathrooms, bedrooms, size, description, constructionYear, hasGarage, id = null) {
+  if (validateInputs([street, houseNumber, zip, city, image, price, size, hasGarage, bedrooms, bathrooms, constructionYear, description])) {
+    return postHouse(city, houseNumber, houseNumberAddition, street, zip, image, price, bathrooms, bedrooms, size, description, constructionYear, hasGarage, id);
+  } else alert('Something went wrong')
+}
 </script>
 
 <template>
   <div>
     <h1 class="align-left text-left">{{ typeof route.params.id != 'undefined' ? 'Edit listing' : 'Create new listing' }}</h1>
     <form class="form">
-      <Input placeholder="Enter the street name" name="street name" @updateValue="(newValue) => street = newValue" :required="true" :validation="patternCityInput" />
+      <Input placeholder="Enter the street name" name="street name" @updateValue="(newValue) => street = newValue" :required="true" :error="errors[0]" />
 
       <div class="flex col-gap">
-        <Input placeholder="Enter house number" type="number" name="house number" @updateValue="(newValue) => houseNumber = newValue" :required="true" />
+        <Input placeholder="Enter house number" type="number" name="house number" @updateValue="(newValue) => houseNumber = newValue" :required="true" :error="errors[1]" />
         <Input placeholder="e.g. A" name="addition (optional)" @updateValue="(newValue) => houseNumberAddition = newValue" />
       </div>
 
-      <Input placeholder="e.g. 1000 AA" name="postal code" @updateValue="(newValue) => zip = newValue" :required="true" />
+      <Input placeholder="e.g. 1000 AA" name="postal code" @updateValue="(newValue) => zip = newValue" :required="true" :error="errors[2]" />
 
-      <Input placeholder="e.g. Utrecht" name="city" @updateValue="(newValue) => city = newValue" :required="true" />
+      <Input placeholder="e.g. Utrecht" name="city" @updateValue="(newValue) => city = newValue" :required="true" :error="errors[3]" />
 
-      <Input placeholder="picture" type="file" name="upload picture (PNG or JPG)" @updateImage="(newValue) => image = newValue" />
+      <Input placeholder="picture" type="file" name="upload picture (PNG or JPG)" @updateImage="(newValue) => image = newValue" :error="errors[4]" />
 
-      <Input placeholder="e.g.€150.000" type="number" name="price" @updateValue="(newValue) => price = newValue" :required="true" />
+      <Input placeholder="e.g.€150.000" type="number" name="price" @updateValue="(newValue) => price = newValue" :required="true" :error="errors[5]" />
 
       <div class="flex col-gap">
-        <Input placeholder="e.g. 60m2" type="number" name="size" @updateValue="(newValue) => size = newValue" :required="true" />
-        <Input placeholder="Select" name="garage" @updateValue="(newValue) => hasGarage = newValue" :required="true" />
+        <Input placeholder="e.g. 60m2" type="number" name="size" @updateValue="(newValue) => size = newValue" :required="true" :error="errors[6]" />
+        <Input name="garage" type="boolean" @updateValue="(newValue) => hasGarage = newValue" :required="true" :error="errors[7]" :presetValue="hasGarage" />
       </div>
 
       <div class="flex col-gap">
-        <Input placeholder="Enter amount" type="number" name="bedrooms" @updateValue="(newValue) => bedrooms = newValue" :required="true" />
-        <Input placeholder="Enter amount" type="number" name="bathrooms" @updateValue="(newValue) => bathrooms = newValue" :required="true" />
+        <Input placeholder="Enter amount" type="number" name="bedrooms" @updateValue="(newValue) => bedrooms = newValue" :required="true" :error="errors[8]" />
+        <Input placeholder="Enter amount" type="number" name="bathrooms" @updateValue="(newValue) => bathrooms = newValue" :required="true" :error="errors[9]" />
       </div>
 
-      <Input placeholder="e.g. 1990" type="number" name="Construction date" @updateValue="(newValue) => constructionYear = newValue" :required="true" />
+      <Input placeholder="e.g. 1990" type="number" name="Construction date" @updateValue="(newValue) => constructionYear = newValue" :required="true" :error="errors[10]" />
 
-      <Input placeholder="Enter description" type="textarea" name="description" @updateValue="(newValue) => description = newValue" :required="true" />
+      <Input placeholder="Enter description" type="textarea" name="description" @updateValue="(newValue) => description = newValue" :required="true" :error="errors[11]" />
 
       <div class="flex w-100 flex-end">
-        <button class="uppercase" @click.prevent="postHouse(
-          city,
-          houseNumber,
-          houseNumberAddition,
-          street,
-          zip,
-          image,
-          price,
-          bathrooms,
-          bedrooms,
-          size,
-          description,
-          constructionYear,
-          hasGarage
-        )">
+        <button class="uppercase" @click.prevent="postFormData(
+      city,
+      houseNumber,
+      houseNumberAddition,
+      street,
+      zip,
+      image,
+      price,
+      bathrooms,
+      bedrooms,
+      size,
+      description,
+      constructionYear,
+      hasGarage,
+      id
+    )">
           post
         </button>
       </div>
@@ -86,4 +111,4 @@ const patternCityInput = "\D";
   min-width: 400px;
   padding-bottom: 30px;
 }
-</style>
+</style>@/components/API.vue
