@@ -12,6 +12,8 @@
   --background1: #f6f6f6;
   --background2: #fff;
 
+  --secondary-rgb: 74, 75, 76;
+
   --text-primary: #000;
   --text-secondary: #4a4b4c;
   --text-hyperlink: #067bc2;
@@ -32,7 +34,7 @@ body {
   min-height: 100vh;
 }
 
-h1 {
+h1, .h1 {
   font-weight: 800;
   font-size: 32px;
   font-family: 'Montserrat', sans-serif;
@@ -224,6 +226,10 @@ width: 100%;
 
 .text-left{
   text-align: left;
+}
+
+.text-center{
+  text-align: center;
 }
 
 .text-black {
