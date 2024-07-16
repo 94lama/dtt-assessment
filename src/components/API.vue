@@ -31,9 +31,9 @@ export function postHouse(city, houseNumber, houseNumberAddition, street, zip, i
     formData.append('description', description);
 
     try {
-        axios.post(`https://api.intern.d-tt.nl/api/houses${id ? '/' + id : ''}`, formData)
+        axios.post(`https://api.intern.d-tt.nl/api/houses/${id ?? ''}`, formData)
             .then(response => response.data)
-            .then((data) => postImage(data.id, image))
+            .then((data) => postImage(id?id:data.id, image))
     } catch (error) {
         console.error(error.response)
     }
@@ -53,10 +53,12 @@ function postImage(id, image) {
 }
 
 export function deleteHouse(id) {
-    return axios.delete(`https://api.intern.d-tt.nl/api/houses/${id}`)
-        .then(() => {
-            return router.push('/')
-        })
-
+    try{
+        axios.delete(`https://api.intern.d-tt.nl/api/houses/${id}`)
+        .then(() => router.push('/'))
+        .then(() => {return location.reload()})
+    } catch (error) {
+        console.error(error.response)
+    }
 }
 </script>

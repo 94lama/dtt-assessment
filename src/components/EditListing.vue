@@ -38,4 +38,4 @@ function deleteListing(id) {
     padding: 0;
     margin: 0;
 }
-</style>./API.js./API.vue
+</style>

@@ -3,30 +3,35 @@ import { ref } from 'vue';
 import defaultImage from '@/assets/images/ic_plus_grey@3x.png';
 
 // The props allows a good variety of possibilities for the input. In this way most of the inputs for the app can be covered with just one component.
-defineProps({
-    preSetValue: { type: String, required: false },
+const props = defineProps({
+    preSetValue: { type: [String, Number, Boolean], default: null },
     name: { type: String },
-    inputValue: {type: String},
+    inputValue: { type: String },
     required: { type: Boolean, default: false },
     placeholder: { type: String, required: false },
     type: { type: String },
     error: { type: String }
 })
-const emit = defineEmits(['updateValue']);
 
-const isRequired = typeof required != 'undefined' ? true : false;
+// General settings and methods
+const emit = defineEmits(['loadImage', 'updateImage', 'updateValue']);
+const isRequired = typeof props.required != 'undefined' ? props.required : false;
+const value = ref(props.preSetValue);
 
-let value = ref(typeof presetValue != 'undefined' ? presetValue : null);
+// Methods for the file input
+const imageValue = ref();
 
 function loadImage(event) {
     emit('updateImage', event.target.files[0])
     value.value = URL.createObjectURL(event.target.files[0])
+    imageValue = event.target.files[0]
 }
 
+// Methods for the boolean input
 function toggleBoolean() {
     value.value = value.value == 'True' ?
-    'False':
-    'True' ;
+        'False' :
+        'True';
     emit('updateValue', value.value)
 }
 </script>
@@ -36,14 +41,17 @@ function toggleBoolean() {
         <label :for="name">{{ name + (required ? ' *' : '') }}</label>
 
         <!-- type = 'file' -->
-        <label v-if="type === 'file'" :for="name" class="img-label" >
+        <label v-if="type === 'file'" :for="name" class="img-label">
             <img :src="value ?? defaultImage" alt="house image" :class="value ? 'img-house' : ''" />
         </label>
-        <input v-if="type === 'file'" :id="name" :placeholder="placeholder" v-model="value" :type="type" @input="loadImage" :required="isRequired" class="input-file" accept="jpg, png" />
+        <input v-if="type === 'file'" :id="name" :placeholder="placeholder" v-model="imageValue" :type="type" @input="loadImage" :required="isRequired" class="input-file" accept="jpg, png" />
+
         <!-- Textarea input -->
-        <textarea v-else-if="type === 'textarea'" :id="name" rows='5' :required="required" @keyup="$emit('updateValue', value)" v-model="value" :placeholder="placeholder"></textarea>
+        <textarea v-else-if="type === 'textarea'" :id="name" rows='5' :required="required" @keyup="$emit('updateValue', value)" v-model="value" :placeholder="placeholder">{{ value }}</textarea>
+
         <!-- Boolean value -->
-        <button class="input" v-else-if="type === 'boolean'" type="button" :id="name" :type="type" @click="toggleBoolean" :required="isRequired" >{{ value }}</button>
+        <button class="input" v-else-if="type === 'boolean'" type="button" :id="name" :type="type" @click="toggleBoolean" :required="isRequired">{{ value }}</button>
+
         <!-- Regular input -->
         <input :id="name" :placeholder="placeholder" v-model="value" :type="type" @keyup="$emit('updateValue', value)" :required="isRequired" v-else />
 
@@ -53,7 +61,8 @@ function toggleBoolean() {
 
 <style scoped>
 input,
-textarea, .input {
+textarea,
+.input {
     background-color: var(--background2);
     color: var(--secondary);
     border-radius: 5px;
@@ -96,7 +105,7 @@ img {
     background-image: "url('/src/assets/images/ic_plus_grey@3x.png')";
 }
 
-.red-border{
+.red-border {
     border: 1px solid red;
 }
 </style>
