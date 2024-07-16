@@ -1,5 +1,5 @@
 <script setup>
-import EditListing from '@/components/EditListing.vue';
+import editListing from '@/components/EditListing.vue';
 import HouseDetailIcons from '@/components/HouseDetailIcons.vue';
 import defaultImage from '@/assets/images/img_placeholder_house@3x.png';
 import bedIcon from '@/assets/images/ic_bed@3x.png';
@@ -33,7 +33,7 @@ defineProps({
         <div class="content w-100 flex column">
             <div class="flex between">
                 <h2 class="m-1" @click="router.push('/houses/' + id)">{{ location.street + ' ' + location.houseNumber }}</h2>
-                <EditListing :id="id" v-if="madeByMe"></EditListing>
+                <editListing :id="id" v-if="madeByMe"></editListing>
             </div>
             <p class="m-1" @click="router.push('/houses/' + id)">€ {{ price }}</p>
             <p class="m-1" @click="router.push('/houses/' + id)">{{ location.zip + ' ' + location.city }}</p>

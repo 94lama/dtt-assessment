@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { useFetch } from '@vueuse/core';
 import { RouterLink, useRouter } from 'vue-router';
+import { useKeyStore } from '@/stores/key';
 import Card from '@/components/Card.vue';
 import Search from '@/components/Search.vue';
 import Sort from '@/components/Sort.vue';
@@ -10,12 +11,17 @@ import { postHouse } from '@/components/API.vue';
 import noResultsImage from '@/assets/images/img_empty_houses@3x.png';
 import addSymbol from '@/assets/images/ic_plus_white@3x.png';
 
+const store = useKeyStore();
 const router=useRouter();
+
+if (typeof store != 'undefined' && !store.key){
+  store.update(prompt('Insert your API key here'))
+}
 
 const { isFetching, data, error } = useFetch('https://api.intern.d-tt.nl/api/houses', {
   method: 'GET',
   headers: {
-    'X-Api-Key': '1owkyeAxJYWi-8EjqbgQ5IK_OLT2VGHC'
+    'X-Api-Key': store.key
   },
 });
 
@@ -34,7 +40,7 @@ const filteredHouses = computed(() => {
     .sort((a, b) => a[sortFilter.value] - b[sortFilter.value]);
 });
 
-postHouse('');
+//postHouse('');
 </script>
 
 <template>

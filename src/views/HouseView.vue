@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { useFetch } from '@vueuse/core';
 import HouseDetailIcons from '@/components/HouseDetailIcons.vue';
 import { useRouter } from 'vue-router';
-import EditListing from '@/components/EditListing.vue';
+import editListing from '@/components/EditListing.vue';
 import locationIcon from '@/assets/images/ic_location@3x.png';
 import priceIcon from '@/assets/images/ic_price@3x.png';
 import sizeIcon from '@/assets/images/ic_size@3x.png';
@@ -32,7 +32,7 @@ const house = computed(() => JSON.parse(data.value));
     <div class="text-black w-90">
       <div class="flex align-center between col-gap">
         <h1>{{ house[0].location.street }}</h1>
-        <EditListing :id="house[0].id"></EditListing>
+        <editListing :id="house[0].id"></editListing>
       </div>
       <div class="flex column row-gap">
         <HouseDetailIcons :image="locationIcon" :value="house[0].location.zip + ' ' + house[0].location.city"/>

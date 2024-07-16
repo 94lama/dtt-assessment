@@ -3,7 +3,9 @@ import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Input from '@/components/Input.vue';
 import { getHouse, postHouse } from '@/components/API.vue';
+import {useKeyStore} from "@/stores/key";
 
+const store = useKeyStore();
 const route = useRoute();
 const id = route.params.id ?? null;
 const loaded = ref(false);
@@ -24,7 +26,7 @@ const constructionYear = ref();
 const hasGarage = ref('False');
 
 if (id) {
-  getHouse(id)
+  getHouse(id, store.key)
     .then((house) => {
       console.log(house);
       city.value = house.location.city;

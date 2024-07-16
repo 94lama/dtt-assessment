@@ -4,17 +4,20 @@ import { useFetch } from '@vueuse/core';
 import router from '@/router';
 import { useRouter } from 'vue-router';
 
-axios.defaults.headers.common['X-Api-Key'] = '1owkyeAxJYWi-8EjqbgQ5IK_OLT2VGHC';
 axios.defaults.headers.common['Accept'] = 'application/json, text/plain, */*';
 
-export async function getHouse(id) {
+export async function getHouse(id, key) {
+    console.log(key)
+    if (typeof key === 'undefined' || !key){
+        return router.push({ name: 'home' });
+    }
     const { isFetching, data, error } = await useFetch(`https://api.intern.d-tt.nl/api/houses/${id}`, {
-        headers: { 'X-Api-Key': '1owkyeAxJYWi-8EjqbgQ5IK_OLT2VGHC' },
+        headers: { 'X-Api-Key': key },
     })
     return JSON.parse(data.value)[0];
 }
 
-export function postHouse(city, houseNumber, houseNumberAddition, street, zip, image, price, bathrooms, bedrooms, size, description, constructionYear, hasGarage, id) {
+export function postHouse(city, houseNumber, houseNumberAddition, street, zip, image, price, bathrooms, bedrooms, size, description, constructionYear, hasGarage, id, apiKey) {
     const formData = new FormData();
 
     formData.append('price', price);
@@ -31,7 +34,9 @@ export function postHouse(city, houseNumber, houseNumberAddition, street, zip, i
     formData.append('description', description);
 
     try {
-        axios.post(`https://api.intern.d-tt.nl/api/houses/${id ? id : ''}`, formData)
+        axios.post(`https://api.intern.d-tt.nl/api/houses/${id ? id : ''}`, formData, {
+            headers: {'X-Api-Key': apiKey}
+        })
             .then(response => response.data)
             .then((data) => postImage(id?id:data.id, image))
     } catch (error) {
@@ -39,12 +44,14 @@ export function postHouse(city, houseNumber, houseNumberAddition, street, zip, i
     }
 }
 
-function postImage(id, image) {
+function postImage(id, image, apiKey) {
     const formData = new FormData();
     formData.append('image', image);
 
     try {
-        axios.post(`https://api.intern.d-tt.nl/api/houses/${id}/upload`, formData)
+        axios.post(`https://api.intern.d-tt.nl/api/houses/${id}/upload`, formData, {
+            headers: {'X-Api-Key': apiKey}
+        })
             .then(() => router.push(`/houses/${id}`))
             .then(() => {return location.reload()})
     } catch (error) {
@@ -52,9 +59,11 @@ function postImage(id, image) {
     }
 }
 
-export function deleteHouse(id) {
+export function deleteHouse(id, apiKey) {
     try{
-        axios.delete(`https://api.intern.d-tt.nl/api/houses/${id}`)
+        axios.delete(`https://api.intern.d-tt.nl/api/houses/${id}`, {
+            headers: {'X-Api-Key': apiKey}
+        })
         .then(() => router.push('/'))
         .then(() => {return location.reload()})
     } catch (error) {

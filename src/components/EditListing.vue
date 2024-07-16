@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { RouterLink, useRouter } from "vue-router";
+import {useKeyStore} from "@/stores/key";
 import { deleteHouse } from "./API.vue";
 
 import editIcon from "@/assets/images/ic_edit@3x.png";
@@ -10,11 +11,12 @@ defineProps({
     id: Number
 })
 
+const store = useKeyStore();
 const router = useRouter();
 const alertIsVisible = ref(false);
 
 function deleteListing(id) {
-    deleteHouse(id)
+    deleteHouse(id, storage.key)
         .then((res) => {
             return router.push({ name: 'home' });
         })
