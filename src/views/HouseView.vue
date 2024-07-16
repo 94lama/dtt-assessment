@@ -31,7 +31,7 @@ const house = computed(() => JSON.parse(data.value));
     <img :src="house[0].image??defaultImage">
     <div class="text-black w-90">
       <div class="flex align-center between col-gap">
-        <h2>{{ house[0].location.street }}</h2>
+        <h1>{{ house[0].location.street }}</h1>
         <EditListing :id="house[0].id"></EditListing>
       </div>
       <div class="flex column row-gap">
@@ -65,7 +65,8 @@ const house = computed(() => JSON.parse(data.value));
 
 img {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 4/2;
+  object-fit: cover;
   margin-bottom: 20px;
 }
 </style>

@@ -22,7 +22,7 @@ nav {
     display: flex;
     top: 0;
     left: 0;
-    height: 60px;
+    height: 80px;
     width: 100%;
     background-color: var(--background2);
     justify-content: center;
@@ -32,19 +32,25 @@ nav {
 
 .navbar {
     width: var(--width);
-    height: 40px;
+    height: 45px;
     display: flex;
     justify-content: left;
     align-items: center;
     padding: 10px;
-    column-gap: 40px;
+    column-gap: 60px;
 }
 
 .router-link-active{
     color: var(--text-primary);
+    font-weight: 800;
 }
 
 .logo {
     height: 100%;
-};
+}
+
+a{
+    font-size: 18px;
+    font-weight: 600;
+}
 </style>

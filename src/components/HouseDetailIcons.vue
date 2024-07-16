@@ -24,7 +24,8 @@ defineProps({
 }
 
 img {
-    height: 25px;
+    height: 20px;
+    padding: 0;
     object-fit: cover;
 }
 </style>

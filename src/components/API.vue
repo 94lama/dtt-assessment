@@ -31,7 +31,7 @@ export function postHouse(city, houseNumber, houseNumberAddition, street, zip, i
     formData.append('description', description);
 
     try {
-        axios.post(`https://api.intern.d-tt.nl/api/houses/${id ?? ''}`, formData)
+        axios.post(`https://api.intern.d-tt.nl/api/houses/${id ? id : ''}`, formData)
             .then(response => response.data)
             .then((data) => postImage(id?id:data.id, image))
     } catch (error) {

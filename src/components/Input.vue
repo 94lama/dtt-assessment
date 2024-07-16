@@ -60,17 +60,9 @@ function toggleBoolean() {
 </template>
 
 <style scoped>
-input,
-textarea,
-.input {
-    background-color: var(--background2);
-    color: var(--secondary);
-    border-radius: 5px;
-    border: 0;
-}
-
 label {
     text-transform: lowercase;
+    color: var(--black);
 }
 
 label::first-letter {
@@ -91,18 +83,16 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
-    height: 100px;
-    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23c3c3c3' stroke-width='4' stroke-dasharray='10' stroke-dashoffset='100' stroke-linecap='square'/%3e%3c/svg%3e");
+    width: 150px;
+    height: 150px;
+    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%23c3c3c3' stroke-width='5' stroke-dasharray='12' stroke-dashoffset='100' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 
 .input-file {
     width: 100px;
     height: 0px;
     background-color: transparent;
-    border: 2px;
-    border-color: var(--tertiary-dark);
-    background-image: "url('/src/assets/images/ic_plus_grey@3x.png')";
+    padding: 0;
 }
 
 .red-border {

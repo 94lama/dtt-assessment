@@ -1,11 +1,11 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Input from '@/components/Input.vue';
 import { getHouse, postHouse } from '@/components/API.vue';
 
 const route = useRoute();
-const id = route.params.id ?? false;
+const id = route.params.id ?? null;
 const loaded = ref(false);
 
 // All the house values are linked to the relative Input component, in the Edit form version, the id allows to fetch info about the house and use the data as preset values.
@@ -74,6 +74,7 @@ function postFormData(city, houseNumber, houseNumberAddition, street, zip, image
 
 <template>
   <div>
+    <div class="background"> </div>
     <h1 class="align-left text-left">{{ typeof route.params.id != 'undefined' ? 'Edit listing' : 'Create new listing' }}</h1>
     <form class="form" v-if="loaded">
       <Input placeholder="Enter the street name" name="street name" @updateValue="(newValue) => street = newValue" :required="true" :error="errors[0]" :preSetValue="street" />
@@ -131,6 +132,20 @@ function postFormData(city, houseNumber, houseNumberAddition, street, zip, image
 </template>
 
 <style scoped>
+.background{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  background-image: url('../assets/images/img_background@3x.png');
+  background-position: 100% 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+}
+
 .form {
   width: 40%;
   min-width: 400px;

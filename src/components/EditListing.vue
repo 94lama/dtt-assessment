@@ -29,12 +29,12 @@ function deleteListing(id) {
 
 <style scoped>
 .buttons {
-    height: 19px;
+    height: 25px;
 }
 
 .icon {
-    height: 18px;
-    width: 15px;
+    height: 28px;
+    width: 23px;
     padding: 0;
     margin: 0;
 }
