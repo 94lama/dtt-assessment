@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/AboutView.vue';
 import HouseView from '../views/HouseView.vue';
 import FormView from '../views/FormView.vue';
-import MyHousesView from '../views/MyHousesView.vue';
+import MyFavouriteHousesView from '../views/MyFavouriteHousesView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,7 +39,7 @@ const router = createRouter({
     {
       path: '/my-houses',
       name: 'my-houses',
-      component: MyHousesView
+      component: MyFavouriteHousesView
     }
   ]
 })

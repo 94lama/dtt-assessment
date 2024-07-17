@@ -72,7 +72,8 @@ function toggleHouse(id) {
 }
 
 .icon {
-    width: 20px;
+    height: 28px;
+    width: 23px;
     padding: 0;
     margin: 0;
 }

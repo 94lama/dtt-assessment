@@ -5,6 +5,10 @@ import Input from '@/components/Input.vue';
 import { getHouse, postHouse } from '@/components/API.vue';
 import { useUserDataStore } from "@/stores/userData";
 
+/* Images */
+import backArrow from '@/assets/images/ic_back_grey@3x.png';
+import backArrowWhite from '@/assets/images/ic_back_grey@3x.png';
+
 const store = useUserDataStore();
 const route = useRoute();
 const id = route.params.id ?? null;
@@ -74,8 +78,11 @@ function postFormData(city, houseNumber, houseNumberAddition, street, zip, image
 </script>
 
 <template>
-  <div>
+  <div class="flex column">
     <div class="background"> </div>
+    <div class="flex">
+      <RouterLink :to="`/houses/${id}`" v-if="id" class="flex col-gap text-left backLink h3"><img class="back" :src="store.mode === 'light' ? backArrow : backArrowWhite" /> Back to detail page</RouterLink>
+    </div>
     <h1 class="align-left text-left">{{ typeof route.params.id != 'undefined' ? 'Edit listing' : 'Create new listing' }}</h1>
     <form class="form" v-if="loaded">
       <Input placeholder="Enter the street name" name="street name" @updateValue="(newValue) => street = newValue" :required="true" :error="errors[0]" :preSetValue="street" />
@@ -151,6 +158,15 @@ function postFormData(city, houseNumber, houseNumberAddition, street, zip, image
   width: 40%;
   min-width: 400px;
   padding-bottom: 30px;
+}
+
+.backLink {
+  margin: 60px 0 20px 0;
+  color: var(--black);
+}
+
+.back {
+  height: 20px;
 }
 
 @media screen and (max-width: 600px) {

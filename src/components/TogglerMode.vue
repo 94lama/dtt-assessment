@@ -22,12 +22,12 @@ button {
 }
 
 .light {
-        background-color: var(--secondary);
-    }
+    background-color: transparent;
+}
 
-    .dark {
-        background-color: rgb(244, 244, 184);
-    }
+.dark {
+    background-color: rgb(244, 244, 184);
+}
 
 @media screen and (max-width: 600px) {
     button {

@@ -15,11 +15,9 @@ export const useUserDataStore = defineStore('key', () => {
     if (mode.value === 'light') {
       mode.value = 'dark';
       document.documentElement.setAttribute('data-theme', mode.value);
-      console.log('toggled')
     } else {
       mode.value = 'light';
       document.documentElement.removeAttribute('data-theme');
-      console.log('toggled')
     }
   }
 

@@ -65,14 +65,14 @@ h2,
   margin: 5px;
 }
 
-.h3 {
+h3, .h3 {
   font-weight: 600;
   font-size: 18px;
   font-family: 'Montserrat', sans-serif;
   line-height: 1.5;
 }
 
-h4 {
+h4, .h4 {
   font-weight: 400;
   font-size: 14px;
   font-family: 'Montserrat', sans-serif;
@@ -212,6 +212,10 @@ button,
 
 .col-gap {
   column-gap: 20px;
+}
+
+.col-gap-5{
+  column-gap: 60px;
 }
 
 .row-gap {

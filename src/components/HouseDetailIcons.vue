@@ -1,16 +1,16 @@
 <script setup>
-defineProps({
+const props = defineProps({
     image: String,
     value: Number,
-    fontClassSize: {type: String, required: false},
+    size: String,
 })
 
 </script>
 
 <template>
-    <div class="card-icon" id={{id}}>
+    <div :class="'card-icon ' + props.size" id={{id}}>
         <img :src="image" alt="House image">
-        <p :class="fontClassSize + ' information'">{{ value }}</p>
+        <p :class="'information ' + props.size">{{ value }}</p>
     </div>
 </template>
 
@@ -27,6 +27,20 @@ img {
     height: 20px;
     padding: 0;
     object-fit: cover;
+}
+
+.sm {
+    font-size: 12px;
+    column-gap: 5px;
+    height: 12px;
+}
+
+.sm img {
+    height: 12px;
+}
+
+.sm .card-icon {
+    height: 12px;
 }
 
 @media screen and (max-width: 600px) {

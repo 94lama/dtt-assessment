@@ -11,7 +11,8 @@ import sizeIcon from '@/assets/images/ic_size@3x.png';
 
 const router = useRouter();
 
-defineProps({
+const props = defineProps({
+    cardSize: String,
     id: Number,
     location: Object,
     image: String,
@@ -26,21 +27,21 @@ defineProps({
 </script>
 
 <template>
-    <div class="card" id={{id}}>
+    <div :class="'card ' + props.cardSize" id={{id}}>
         <RouterLink :to="'/houses/' + id" class="image">
             <img :src="image ?? defaultImage" alt="House image" class="image">
         </RouterLink>
         <div class="content w-100 flex column">
-            <div class="flex between">
-                <h2 @click="router.push('/houses/' + id)">{{ location.street + ' ' + location.houseNumber }}</h2>
-                <HouseActions :id="id" :madeByMe="madeByMe"></HouseActions>
+            <div class="flex">
+                <h2 @click="router.push('/houses/' + id)" class="w-100">{{ location.street + ' ' + location.houseNumber }}</h2>
+                <HouseActions v-if="typeof props.cardSize !== 'undefined' && props.cardSize !== 'sm'" :id="id" :madeByMe="madeByMe"></HouseActions>
             </div>
             <p @click="router.push('/houses/' + id)">€ {{ price }}</p>
             <p @click="router.push('/houses/' + id)">{{ location.zip + ' ' + location.city }}</p>
-            <div class="flex col-gap" @click="router.push('/houses/' + id)">
-                <HouseDetailIcons :value="rooms.bedrooms" :image="bedIcon" />
-                <HouseDetailIcons :value="rooms.bathrooms" :image="bathIcon" />
-                <HouseDetailIcons :value="size + ' m2'" :image="sizeIcon" />
+            <div class="flex iconsContainer" @click="router.push('/houses/' + id)">
+                <HouseDetailIcons :value="rooms.bedrooms" :image="bedIcon" :size="cardSize" />
+                <HouseDetailIcons :value="rooms.bathrooms" :image="bathIcon" :size="cardSize" />
+                <HouseDetailIcons :value="size + ' m2'" :image="sizeIcon" :size="cardSize" />
             </div>
         </div>
     </div>
@@ -69,14 +70,51 @@ defineProps({
 
 .content {
     margin: 25px;
-    align-items: left;
     text-align: left;
-    justify-content: space-around;
+}
+
+h2,
+p,
+.iconsContainer {
+    padding: 10px 0;
+    margin: 0;
+}
+
+h2 {
+    text-overflow: ellipsis;
+    max-height: 20px;
+}
+
+.sm {
+    border-radius: 5px;
+    width: 100%;
+    height: 120px;
+}
+
+.sm .image {
+    height: 100px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.sm h2,
+.sm p,
+.sm .iconsContainer {
+    padding: 5px 0;
+    font-size: 12px;
+    margin: 0;
+}
+
+.sm > .icon {
+    height: 5px !important;
+}
+
+.sm .content{
+    margin: 5px;
 }
 
 @media screen and (max-width: 600px) {
     .card {
-        display: flex;
         border-radius: 5px;
         margin: 10px 0;
         width: 100%;
@@ -84,14 +122,28 @@ defineProps({
     }
 
     .content {
-    margin: 10px;
-    height: 100px;
-}
+        margin: 10px;
+        height: 100px;
+        column-gap: 0px;
+    }
 
     .image {
         height: 100px;
         margin: 10px;
         border-radius: 5px;
+    }
+
+    h2,
+    p,
+    .iconsContainer {
+        padding: 5px 0;
+        margin: 0;
+    }
+
+    h2 {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-height: 13px;
     }
 }
 </style>
