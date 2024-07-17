@@ -19,9 +19,7 @@ const router = useRouter();
 const alertIsVisible = ref(false);
 const heartColor = ref(store.likedHouses.includes(props.id) ?
     'var(--primary)' :
-    (store.mode === 'light' ?
-        '#333' :
-        '#ccc'));
+        '#ccc');
 
 function deleteListing(id) {
     deleteHouse(id, storage.key)
@@ -33,9 +31,7 @@ function deleteListing(id) {
 function toggleHouse(id) {
     store.toggleLike(id);
     heartColor.value = heartColor.value === 'var(--primary)' ?
-        (store.mode === 'light' ?
-            '#333' :
-            '#ccc') :
+        '#ccc' :
         'var(--primary)';
 }
 </script>

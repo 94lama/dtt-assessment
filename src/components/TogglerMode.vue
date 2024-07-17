@@ -2,6 +2,7 @@
 import { useUserDataStore } from '@/stores/userData';
 
 const store = useUserDataStore();
+window.matchMedia('(prefers-color-scheme: dark)').matches ? store.toggleMode() : null;
 </script>
 
 <template>
