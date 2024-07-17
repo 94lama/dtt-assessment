@@ -9,13 +9,19 @@ import darkEditIcon from "@/assets/images/ic_edit_white@3x.png";
 import deleteIcon from "@/assets/images/ic_delete@3x.png";
 import darkDeleteIcon from "@/assets/images/ic_delete_white@3x.png";
 
-defineProps({
-    id: Number
+const props = defineProps({
+    id: Number,
+    madeByMe: Boolean
 })
 
 const store = useUserDataStore();
 const router = useRouter();
 const alertIsVisible = ref(false);
+const heartColor = ref(store.likedHouses.includes(props.id) ?
+    'var(--primary)' :
+    (store.mode === 'light' ?
+        '#333' :
+        '#ccc'));
 
 function deleteListing(id) {
     deleteHouse(id, storage.key)
@@ -24,12 +30,30 @@ function deleteListing(id) {
         })
 }
 
+function toggleHouse(id) {
+    store.toggleLike(id);
+    heartColor.value = heartColor.value === 'var(--primary)' ?
+        (store.mode === 'light' ?
+            '#333' :
+            '#ccc') :
+        'var(--primary)';
+}
 </script>
 
 <template>
     <div class="flex col-gap align-center buttons">
-        <RouterLink :to="{ name: 'edit', params: { 'id': id } }" class="icon"><img :src="store.mode === 'light' ? editIcon : darkEditIcon" class="icon"></RouterLink>
-        <button @click="() => (alertIsVisible = true)" class="a icon"><img :src="store.mode === 'light' ? deleteIcon : darkDeleteIcon" class="icon"></button>
+        <!-- Edit button -->
+        <RouterLink v-if="madeByMe" :to="{ name: 'edit', params: { 'id': id } }" class="icon"><img :src="store.mode === 'light' ? editIcon : darkEditIcon" class="icon"></RouterLink>
+
+        <!-- Delete button -->
+        <button v-if="madeByMe" @click="() => (alertIsVisible = true)" class="a icon"><img :src="store.mode === 'light' ? deleteIcon : darkDeleteIcon" class="icon"></button>
+
+        <!-- Like button -->
+        <button @click.prevent="() => { toggleHouse(id) }" class="a icon">
+            <svg xmlns="http://www.w3.org/2000/svg" id="Filled" viewBox="0 0 24 24" width="50" height="50" :fill="heartColor">
+                <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z" />
+            </svg>
+        </button>
     </div>
 
     <!-- Deleting alert -->

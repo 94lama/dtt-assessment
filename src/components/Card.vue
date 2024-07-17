@@ -33,7 +33,7 @@ defineProps({
         <div class="content w-100 flex column">
             <div class="flex between">
                 <h2 @click="router.push('/houses/' + id)">{{ location.street + ' ' + location.houseNumber }}</h2>
-                <HouseActions :id="id" v-if="madeByMe"></HouseActions>
+                <HouseActions :id="id" :madeByMe="madeByMe"></HouseActions>
             </div>
             <p @click="router.push('/houses/' + id)">€ {{ price }}</p>
             <p @click="router.push('/houses/' + id)">{{ location.zip + ' ' + location.city }}</p>
