@@ -9,6 +9,7 @@ import aboutIcon from "@/assets/images/ic_mobile_navigarion_info@3x.png";
 import aboutIconActive from "@/assets/images/ic_mobile_navigarion_info_active@3x.png";
 
 const router = useRouter();
+//const windowWidth = window.innerWidth;
 </script>
 
 <template>

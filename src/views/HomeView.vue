@@ -9,7 +9,7 @@ import Sort from '@/components/Sort.vue';
 
 import noResultsImage from '@/assets/images/img_empty_houses@3x.png';
 import addSymbol from '@/assets/images/ic_plus_white@3x.png';
-import smallAddSymbol from '@/assets/images/ic_plus_grey@3x.png';
+import AddSymbolGrey from '@/assets/images/ic_plus_grey@3x.png';
 
 const store = useUserDataStore();
 const router=useRouter();
@@ -50,8 +50,8 @@ const filteredHouses = computed(() => {
   <div v-else-if="data" class="main">
     <div class="flex w-100 align-center no-wrap title">
       <h1 :class="screenWidth <= 600 ? 'm-auto' : ''" >Houses</h1>
-      <RouterLink to="/house/create" class="button uppercase" v-if="screenWidth > 768"><img :src="addSymbol" class="icon"> Create new</RouterLink>
-      <RouterLink v-else to="/house/create"><img :src="smallAddSymbol" class="icon"></RouterLink>
+      <RouterLink to="/house/create" class="button uppercase" v-if="screenWidth > 768"><img :src="store.mode === 'light' ? addSymbol : addSymbolGrey" class="icon"> Create new</RouterLink>
+      <RouterLink v-else to="/house/create"><img :src="store.mode === 'light' ? addSymbol : addSymbolGrey" class="icon"></RouterLink>
     </div>
     <div class="queries flex between">
       <Search @emitInput="(value) => searchString = value" type="text" placeholder="Search for a house" />

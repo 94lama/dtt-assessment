@@ -85,8 +85,8 @@ function deleteListing(id) {
     }
 
     .icon {
-        height: 18px;
-        width: 15px;
+        height: 15px;
+        width: 12px;
         padding: 0;
         margin: 0;
     }
