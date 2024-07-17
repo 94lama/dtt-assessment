@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/AboutView.vue';
 import HouseView from '../views/HouseView.vue';
 import FormView from '../views/FormView.vue';
+import MyHousesView from '../views/MyHousesView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,6 +36,11 @@ const router = createRouter({
       name: 'edit',
       component: FormView
     },
+    {
+      path: '/my-houses',
+      name: 'my-houses',
+      component: MyHousesView
+    }
   ]
 })
 

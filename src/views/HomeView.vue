@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useFetch } from '@vueuse/core';
-import { RouterLink, useRouter } from 'vue-router';
+import { RouterLink } from 'vue-router';
 import { useUserDataStore } from '@/stores/userData';
 import Card from '@/components/Card.vue';
 import Search from '@/components/Search.vue';
@@ -9,10 +9,10 @@ import Sort from '@/components/Sort.vue';
 
 import noResultsImage from '@/assets/images/img_empty_houses@3x.png';
 import addSymbol from '@/assets/images/ic_plus_white@3x.png';
-import AddSymbolGrey from '@/assets/images/ic_plus_grey@3x.png';
+import addSymbolGrey from '@/assets/images/ic_plus_grey@3x.png';
 
 const store = useUserDataStore();
-const router=useRouter();
+const screenWidth = window.innerWidth;
 
 if (typeof store != 'undefined' && !store.key){
   store.update(prompt('Insert your API key here'))
