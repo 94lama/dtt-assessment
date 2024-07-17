@@ -11,7 +11,6 @@ export const useUserDataStore = defineStore('key', () => {
 
   /* Screen mode (dark/light) */
   const mode = ref(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  console.log(mode)
 
   function toggleMode() {
     if (mode.value === 'light') {

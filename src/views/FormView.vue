@@ -28,7 +28,6 @@ const hasGarage = ref('False');
 if (id) {
   getHouse(id, store.key)
     .then((house) => {
-      console.log(house);
       city.value = house.location.city;
       houseNumber.value = house.location.houseNumber;
       houseNumberAddition.value = house.location.houseNumberAddition;

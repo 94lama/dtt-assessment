@@ -22,8 +22,6 @@ const { isFetching, data, error } = useFetch(`https://api.intern.d-tt.nl/api/hou
    },
 });
 
-console.log(window.watchMedia)
-
 const house = computed(() => JSON.parse(data.value));
 </script>
 

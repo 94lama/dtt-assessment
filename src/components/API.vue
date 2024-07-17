@@ -7,7 +7,6 @@ import { useRouter } from 'vue-router';
 axios.defaults.headers.common['Accept'] = 'application/json, text/plain, */*';
 
 export async function getHouse(id, key) {
-    console.log(key)
     if (typeof key === 'undefined' || !key){
         return router.push({ name: 'home' });
     }
