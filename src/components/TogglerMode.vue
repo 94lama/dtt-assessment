@@ -14,10 +14,19 @@ const store = useUserDataStore();
 
 <style scoped>
 button {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
+    padding: 0;
 }
+
+.light {
+        background-color: var(--secondary);
+    }
+
+    .dark {
+        background-color: rgb(244, 244, 184);
+    }
 
 @media screen and (max-width: 600px) {
     button {
@@ -25,14 +34,6 @@ button {
         height: 40px;
         padding: 0;
         bottom: -5px;
-    }
-
-    .light {
-        background-color: var(--secondary);
-    }
-
-    .dark {
-        background-color: rgb(244, 244, 184);
     }
 }
 </style>
