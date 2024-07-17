@@ -1,9 +1,9 @@
 <script setup>
 import { computed } from 'vue'
 import { useFetch } from '@vueuse/core';
-import HouseDetailIcons from '@/components/HouseDetailIcons.vue';
 import { useRouter } from 'vue-router';
-import editListing from '@/components/EditListing.vue';
+import HouseDetailIcons from '@/components/HouseDetailIcons.vue';
+import HouseActions from '@/components/HouseActions.vue';
 import locationIcon from '@/assets/images/ic_location@3x.png';
 import priceIcon from '@/assets/images/ic_price@3x.png';
 import sizeIcon from '@/assets/images/ic_size@3x.png';
@@ -22,6 +22,8 @@ const { isFetching, data, error } = useFetch(`https://api.intern.d-tt.nl/api/hou
    },
 });
 
+console.log(window.watchMedia)
+
 const house = computed(() => JSON.parse(data.value));
 </script>
 
@@ -32,7 +34,7 @@ const house = computed(() => JSON.parse(data.value));
     <div class="text-black w-90">
       <div class="flex align-center between col-gap">
         <h1>{{ house[0].location.street }}</h1>
-        <editListing :id="house[0].id"></editListing>
+        <HouseActions :id="house[0].id"></HouseActions>
       </div>
       <div class="flex column row-gap">
         <HouseDetailIcons :image="locationIcon" :value="house[0].location.zip + ' ' + house[0].location.city"/>

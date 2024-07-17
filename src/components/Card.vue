@@ -1,12 +1,12 @@
 <script setup>
-import editListing from '@/components/EditListing.vue';
+import { RouterLink } from 'vue-router';
+import { useRouter } from 'vue-router';
+import HouseActions from '@/components/HouseActions.vue';
 import HouseDetailIcons from '@/components/HouseDetailIcons.vue';
 import defaultImage from '@/assets/images/img_placeholder_house@3x.png';
 import bedIcon from '@/assets/images/ic_bed@3x.png';
 import bathIcon from '@/assets/images/ic_bath@3x.png';
 import sizeIcon from '@/assets/images/ic_size@3x.png';
-import { RouterLink } from 'vue-router';
-import { useRouter } from 'vue-router';
 
 
 const router = useRouter();
@@ -33,7 +33,7 @@ defineProps({
         <div class="content w-100 flex column">
             <div class="flex between">
                 <h2 class="m-1" @click="router.push('/houses/' + id)">{{ location.street + ' ' + location.houseNumber }}</h2>
-                <editListing :id="id" v-if="madeByMe"></editListing>
+                <HouseActions :id="id" v-if="madeByMe"></HouseActions>
             </div>
             <p class="m-1" @click="router.push('/houses/' + id)">€ {{ price }}</p>
             <p class="m-1" @click="router.push('/houses/' + id)">{{ location.zip + ' ' + location.city }}</p>

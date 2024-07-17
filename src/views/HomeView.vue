@@ -2,16 +2,15 @@
 import { computed, ref } from 'vue'
 import { useFetch } from '@vueuse/core';
 import { RouterLink, useRouter } from 'vue-router';
-import { useKeyStore } from '@/stores/key';
+import { useUserDataStore } from '@/stores/userData';
 import Card from '@/components/Card.vue';
 import Search from '@/components/Search.vue';
 import Sort from '@/components/Sort.vue';
-import { postHouse } from '@/components/API.vue';
 
 import noResultsImage from '@/assets/images/img_empty_houses@3x.png';
 import addSymbol from '@/assets/images/ic_plus_white@3x.png';
 
-const store = useKeyStore();
+const store = useUserDataStore();
 const router=useRouter();
 
 if (typeof store != 'undefined' && !store.key){

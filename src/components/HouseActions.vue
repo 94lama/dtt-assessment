@@ -1,17 +1,19 @@
 <script setup>
 import { ref } from "vue";
 import { RouterLink, useRouter } from "vue-router";
-import {useKeyStore} from "@/stores/key";
+import {useUserDataStore} from "@/stores/userData";
 import { deleteHouse } from "./API.vue";
 
 import editIcon from "@/assets/images/ic_edit@3x.png";
+import darkEditIcon from "@/assets/images/ic_edit_white@3x.png";
 import deleteIcon from "@/assets/images/ic_delete@3x.png";
+import darkDeleteIcon from "@/assets/images/ic_delete_white@3x.png";
 
 defineProps({
     id: Number
 })
 
-const store = useKeyStore();
+const store = useUserDataStore();
 const router = useRouter();
 const alertIsVisible = ref(false);
 
@@ -26,8 +28,8 @@ function deleteListing(id) {
 
 <template>
     <div class="flex col-gap align-center buttons">
-        <RouterLink :to="{ name: 'edit', params: { 'id': id } }" class="icon"><img :src="editIcon" class="icon"></RouterLink>
-        <button @click="() => (alertIsVisible = true)" class="a icon"><img :src="deleteIcon" class="icon"></button>
+        <RouterLink :to="{ name: 'edit', params: { 'id': id } }" class="icon"><img :src="store.mode==='light'?editIcon : darkEditIcon" class="icon"></RouterLink>
+        <button @click="() => (alertIsVisible = true)" class="a icon"><img :src="store.mode==='light'?deleteIcon : darkDeleteIcon" class="icon"></button>
     </div>
 
     <!-- Deleting alert -->

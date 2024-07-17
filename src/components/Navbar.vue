@@ -1,17 +1,21 @@
 <script setup>
 import { RouterLink } from 'vue-router';
 import { useRouter } from 'vue-router';
-import logo from '@/assets/images/img_logo_dtt@3x.png';
+import TogglerMode from '@/components/TogglerMode.vue';
+import logo from "@/assets/images/img_logo_dtt@3x.png";
 
 const router = useRouter();
 </script>
 
 <template>
   <nav>
-    <div class="navbar">
-        <img class="logo" :src="logo" alt="DTT logo" />
-        <RouterLink to="/" >Houses</RouterLink>
-        <RouterLink to="/about" >About</RouterLink>
+    <div class="navbar flex">
+        <div class="flex col-gap links">
+            <img class="logo" :src="logo" alt="DTT logo" />
+            <RouterLink to="/" >Houses</RouterLink>
+            <RouterLink to="/about" >About</RouterLink>
+        </div>
+        <TogglerMode></TogglerMode>
     </div>
 </nav>
 </template>
@@ -31,6 +35,16 @@ nav {
 }
 
 .navbar {
+    width: var(--width);
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    column-gap: 60px;
+}
+
+.links {
     width: var(--width);
     height: 45px;
     display: flex;

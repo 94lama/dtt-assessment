@@ -3,9 +3,9 @@ import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Input from '@/components/Input.vue';
 import { getHouse, postHouse } from '@/components/API.vue';
-import {useKeyStore} from "@/stores/key";
+import {useUserDataStore} from "@/stores/userData";
 
-const store = useKeyStore();
+const store = useUserDataStore();
 const route = useRoute();
 const id = route.params.id ?? null;
 const loaded = ref(false);
