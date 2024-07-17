@@ -8,9 +8,9 @@ defineProps({
 </script>
 
 <template>
-    <div class="card-icon m-1" id={{id}}>
+    <div class="card-icon" id={{id}}>
         <img :src="image" alt="House image">
-        <p :class="fontClassSize">{{ value }}</p>
+        <p :class="fontClassSize + ' information'">{{ value }}</p>
     </div>
 </template>
 
@@ -19,7 +19,7 @@ defineProps({
     display: flex;
     align-items: center;
     column-gap: 10px;
-    padding: 0px 5px;
+    padding: 0px;
     height: 20px;
 }
 
@@ -27,5 +27,11 @@ img {
     height: 20px;
     padding: 0;
     object-fit: cover;
+}
+
+@media screen and (max-width: 600px) {
+img {
+    height: 12px;
+}
 }
 </style>

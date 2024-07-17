@@ -45,7 +45,28 @@ button {
 
 @media screen and (max-width: 600px) {
     .sort-component {
-        max-width: var(--width);
+        display: grid;
+        grid-auto-columns: 0.5fr 0.5fr;
+        grid-auto-flow: column;
+        max-width: 100%;
+        margin: 10px 0 0 0;
+    }
+
+    button {
+        background-color: var(--tertiary-dark);
+        width: 100%;
+    }
+
+    .sort-component :nth-child(1) {
+        border-radius: 10px 0 0 10px;
+    }
+
+    .sort-component :nth-child(2) {
+        border-radius: 0 10px 10px 0;
+    }
+
+    .active {
+        background-color: var(--primary);
     }
 }
 </style>

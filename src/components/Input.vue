@@ -47,7 +47,7 @@ function toggleBoolean() {
         <input v-if="type === 'file'" :id="name" :placeholder="placeholder" v-model="imageValue" :type="type" @input="loadImage" :required="isRequired" class="input-file" accept="jpg, png" />
 
         <!-- Textarea input -->
-        <textarea v-else-if="type === 'textarea'" :id="name" rows='5' :required="required" @keyup="$emit('updateValue', value)" v-model="value" :placeholder="placeholder">{{ value }}</textarea>
+        <textarea v-else-if="type === 'textarea'" :id="name" :rows='5' :required="required" @keyup="$emit('updateValue', value)" v-model="value" :placeholder="placeholder">{{ value }}</textarea>
 
         <!-- Boolean value -->
         <button class="input" v-else-if="type === 'boolean'" type="button" :id="name" :type="type" @click="toggleBoolean" :required="isRequired">{{ value }}</button>

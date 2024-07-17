@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { RouterLink, useRouter } from "vue-router";
-import {useUserDataStore} from "@/stores/userData";
+import { useUserDataStore } from "@/stores/userData";
 import { deleteHouse } from "./API.vue";
 
 import editIcon from "@/assets/images/ic_edit@3x.png";
@@ -28,8 +28,8 @@ function deleteListing(id) {
 
 <template>
     <div class="flex col-gap align-center buttons">
-        <RouterLink :to="{ name: 'edit', params: { 'id': id } }" class="icon"><img :src="store.mode==='light'?editIcon : darkEditIcon" class="icon"></RouterLink>
-        <button @click="() => (alertIsVisible = true)" class="a icon"><img :src="store.mode==='light'?deleteIcon : darkDeleteIcon" class="icon"></button>
+        <RouterLink :to="{ name: 'edit', params: { 'id': id } }" class="icon"><img :src="store.mode === 'light' ? editIcon : darkEditIcon" class="icon"></RouterLink>
+        <button @click="() => (alertIsVisible = true)" class="a icon"><img :src="store.mode === 'light' ? deleteIcon : darkDeleteIcon" class="icon"></button>
     </div>
 
     <!-- Deleting alert -->
@@ -37,10 +37,10 @@ function deleteListing(id) {
         <div class="alert flex column row-gap">
             <h2 class="h1 text-center">Delete listing</h2>
             <p class="text-center">Are you sure you want to delete this listing?<br />
-            This action cannot be undone.</p>
+                This action cannot be undone.</p>
             <div class="flex column row-gap align-center justify-center">
                 <button @click="() => deleteListing(id)" class="uppercase w-100">yes, delete</button>
-                <button @click="() => {alertIsVisible = false}" class="uppercase w-100 color-dark">go back</button>
+                <button @click="() => { alertIsVisible = false }" class="uppercase w-100 color-dark">go back</button>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@ function deleteListing(id) {
     margin: 0;
 }
 
-.confirmation{
+.confirmation {
     position: fixed;
     top: 0;
     left: 0;
@@ -75,7 +75,20 @@ function deleteListing(id) {
     border-radius: 10px;
 }
 
-.color-dark{
+.color-dark {
     background-color: var(--secondary)
+}
+
+@media screen and (max-width: 600px) {
+    .buttons {
+        height: 25px;
+    }
+
+    .icon {
+        height: 18px;
+        width: 15px;
+        padding: 0;
+        margin: 0;
+    }
 }
 </style>

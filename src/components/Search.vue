@@ -69,7 +69,44 @@ img {
 
 @media screen and (max-width: 600px) {
     .search-component {
-        max-width: var(--width);
+        border-radius: 5px;
+        max-width: 100%;
+        height: auto;
+        margin: 10px 0;
+        border-radius: 10px 0 0 10px;
+    }
+
+    .search {
+        border-radius: 10px 0 0 10px;
+    }
+
+    .delete {
+        position: absolute;
+        right: 0;
+        border-radius: 0 10px 10px 0;
+    }
+
+    input {
+        border: 0;
+        width: 100%;
+        padding: 0;
+        border-radius: 0 10px 10px 0;
+        background-color: var(--tertiary);
+    }
+
+    img {
+        background-color: var(--tertiary);
+        height: 25px;
+    }
+
+    .icon {
+        height: 15px;
+        width: 15px;
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--tertiary);
     }
 }
 </style>

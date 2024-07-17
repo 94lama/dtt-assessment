@@ -32,12 +32,12 @@ defineProps({
         </RouterLink>
         <div class="content w-100 flex column">
             <div class="flex between">
-                <h2 class="m-1" @click="router.push('/houses/' + id)">{{ location.street + ' ' + location.houseNumber }}</h2>
+                <h2 @click="router.push('/houses/' + id)">{{ location.street + ' ' + location.houseNumber }}</h2>
                 <HouseActions :id="id" v-if="madeByMe"></HouseActions>
             </div>
-            <p class="m-1" @click="router.push('/houses/' + id)">€ {{ price }}</p>
-            <p class="m-1" @click="router.push('/houses/' + id)">{{ location.zip + ' ' + location.city }}</p>
-            <div class="flex" @click="router.push('/houses/' + id)">
+            <p @click="router.push('/houses/' + id)">€ {{ price }}</p>
+            <p @click="router.push('/houses/' + id)">{{ location.zip + ' ' + location.city }}</p>
+            <div class="flex col-gap" @click="router.push('/houses/' + id)">
                 <HouseDetailIcons :value="rooms.bedrooms" :image="bedIcon" />
                 <HouseDetailIcons :value="rooms.bathrooms" :image="bathIcon" />
                 <HouseDetailIcons :value="size + ' m2'" :image="sizeIcon" />
@@ -72,5 +72,26 @@ defineProps({
     align-items: left;
     text-align: left;
     justify-content: space-around;
+}
+
+@media screen and (max-width: 600px) {
+    .card {
+        display: flex;
+        border-radius: 5px;
+        margin: 10px 0;
+        width: 100%;
+        height: auto;
+    }
+
+    .content {
+    margin: 10px;
+    height: 100px;
+}
+
+    .image {
+        height: 100px;
+        margin: 10px;
+        border-radius: 5px;
+    }
 }
 </style>

@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Input from '@/components/Input.vue';
 import { getHouse, postHouse } from '@/components/API.vue';
-import {useUserDataStore} from "@/stores/userData";
+import { useUserDataStore } from "@/stores/userData";
 
 const store = useUserDataStore();
 const route = useRoute();
@@ -134,7 +134,7 @@ function postFormData(city, houseNumber, houseNumberAddition, street, zip, image
 </template>
 
 <style scoped>
-.background{
+.background {
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -152,5 +152,36 @@ function postFormData(city, houseNumber, houseNumberAddition, street, zip, image
   width: 40%;
   min-width: 400px;
   padding-bottom: 30px;
+}
+
+@media screen and (max-width: 600px) {
+  .background {
+    position: fixed;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background-image: url('../assets/images/img_background@3x.png');
+    background-position: 25vw 90%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+  }
+
+  .form {
+    width: 100%;
+    min-width: 100%;
+    padding-bottom: 80px;
+  }
+
+  input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 20px;
+  }
 }
 </style>
