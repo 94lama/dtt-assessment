@@ -3,7 +3,8 @@ import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/AboutView.vue';
 import HouseView from '../views/HouseView.vue';
 import FormView from '../views/FormView.vue';
-import MyFavouriteHousesView from '../views/MyFavouriteHousesView.vue';
+import MyHousesView from '../views/MyHousesView.vue';
+import MyFavouriteHouses from '@/views/MyFavouriteHouses.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,9 +38,14 @@ const router = createRouter({
       component: FormView
     },
     {
+      path: '/my-favourite-houses',
+      name: 'favourite',
+      component: MyFavouriteHouses
+    },
+    {
       path: '/my-houses',
       name: 'my-houses',
-      component: MyFavouriteHousesView
+      component: MyHousesView
     }
   ]
 })

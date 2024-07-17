@@ -1,7 +1,5 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { useFetch } from '@vueuse/core';
-import { RouterLink } from 'vue-router';
 import { useUserDataStore } from '@/stores/userData';
 import Card from '@/components/Card.vue';
 import Search from '@/components/Search.vue';
@@ -11,8 +9,8 @@ import noResultsImage from '@/assets/images/img_empty_houses@3x.png';
 
 const props = defineProps({
     houses: Array,
-    filter: Boolean,
-    image: Boolean,
+    filter: [Boolean, String],
+    image: [Boolean, String],
     size: String
 })
 

@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps({
     image: String,
-    value: Number,
+    value: [Number, String],
     size: String,
 })
 
@@ -41,6 +41,12 @@ img {
 
 .sm .card-icon {
     height: 12px;
+    width: auto;
+}
+
+.sm p {
+    height: auto;
+    margin: 0 5px;
 }
 
 @media screen and (max-width: 600px) {

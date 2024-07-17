@@ -1,7 +1,7 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { useFetch } from '@vueuse/core';
-import {RouterLink} from 'vue-router';
+import { RouterLink } from 'vue-router';
 import { useUserDataStore } from '@/stores/userData';
 import HousesList from '@/components/HousesList.vue';
 
@@ -20,14 +20,13 @@ const { isFetching, data, error } = useFetch('https://api.intern.d-tt.nl/api/hou
 });
 
 const houses = computed(() => JSON.parse(data.value));
-const searchString = ref('');
-const sortFilter = ref('price');
+
 
 // Filtering the results before sorting helps reducing the overall compiling time. 
 // The method includes allows to remove the errors given if searchString is null.
 const filteredHouses = computed(() => {
     return houses.value
-        .filter((house) => store.likedHouses.includes(house.id))
+            .filter((house) => store.likedHouses.includes(house.id))
 });
 
 //postHouse('');
@@ -35,7 +34,7 @@ const filteredHouses = computed(() => {
 
 <template>
     <div class="flex w-100 align-center no-wrap title">
-        <h1 :class="screenWidth <= 600 ? 'm-auto' : ''">My favourite houses: </h1>
+        <h1 :class="screenWidth <= 600 ? 'm-auto' : ''">{{filter === 'madeByMe' ? 'My houses: ' : 'My favourite houses: '}}</h1>
         <RouterLink to="/house/create" class="button uppercase" v-if="screenWidth > 768"><img :src="store.mode === 'light' ? addSymbol : addSymbolGrey" class="icon"> Create new</RouterLink>
         <RouterLink v-else to="/house/create"><img :src="store.mode === 'light' ? addSymbol : addSymbolGrey" class="icon"></RouterLink>
     </div>
@@ -46,10 +45,10 @@ const filteredHouses = computed(() => {
 
 <style scoped>
 .title {
-  width: 100%;
-  max-width: var(--width);
-  margin: 50px 0 10px 0;
-  justify-content: space-between;
+    width: 100%;
+    max-width: var(--width);
+    margin: 50px 0 10px 0;
+    justify-content: space-between;
 }
 
 img {

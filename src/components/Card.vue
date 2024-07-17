@@ -89,6 +89,7 @@ h2 {
     border-radius: 5px;
     width: 100%;
     height: 120px;
+    margin: px 0;
 }
 
 .sm .image {
@@ -103,6 +104,7 @@ h2 {
     padding: 5px 0;
     font-size: 12px;
     margin: 0;
+    column-gap: 8px;
 }
 
 .sm > .icon {

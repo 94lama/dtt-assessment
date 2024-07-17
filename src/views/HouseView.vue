@@ -65,7 +65,7 @@ const recommendedHouses = computed(() =>
         <div class="text-black w-90">
           <div class="flex align-center between col-gap">
             <h1>{{ house[0].location.street }}</h1>
-            <HouseActions :id="house[0].id"></HouseActions>
+            <HouseActions :id="house[0].id" :madeByMe="house[0].madeByMe"></HouseActions>
           </div>
           <div class="flex column row-gap">
             <HouseDetailIcons :image="locationIcon" :value="house[0].location.zip + ' ' + house[0].location.city" />
@@ -112,7 +112,7 @@ const recommendedHouses = computed(() =>
 
 .houseImage {
   width: 100%;
-  aspect-ratio: 4/2;
+  aspect-ratio: 3/2;
   object-fit: cover;
   margin-bottom: 20px;
 }

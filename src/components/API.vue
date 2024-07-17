@@ -6,12 +6,26 @@ import { useRouter } from 'vue-router';
 
 axios.defaults.headers.common['Accept'] = 'application/json, text/plain, */*';
 
-export async function getHouse(id, key) {
+/* export function getHouses(key) {
     if (typeof key === 'undefined' || !key){
         return router.push({ name: 'home' });
     }
+    
+    axios.get('https://api.intern.d-tt.nl/api/houses', {
+        headers: { 'X-Api-Key': key }
+    })
+    .then(response => {
+        console.log(response.data)
+        return response.data
+    })
+} */
+
+export async function getHouse(id, apiKey) {
+    if (typeof apiKey === 'undefined' || !apiKey){
+        return router.push({ name: 'home' });
+    }
     const { isFetching, data, error } = await useFetch(`https://api.intern.d-tt.nl/api/houses/${id}`, {
-        headers: { 'X-Api-Key': key },
+        headers: { 'X-Api-Key': apiKey },
     })
     return JSON.parse(data.value)[0];
 }
@@ -37,7 +51,7 @@ export function postHouse(city, houseNumber, houseNumberAddition, street, zip, i
             headers: {'X-Api-Key': apiKey}
         })
             .then(response => response.data)
-            .then((data) => postImage(id?id:data.id, image))
+            .then((data) => postImage(id?id:data.id, image, apiKey))
     } catch (error) {
         console.error(error.response)
     }

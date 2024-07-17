@@ -70,9 +70,9 @@ function validateInputs(values = []) {
   return validator
 }
 
-function postFormData(city, houseNumber, houseNumberAddition, street, zip, image, price, bathrooms, bedrooms, size, description, constructionYear, hasGarage, id = null) {
+function postFormData(city, houseNumber, houseNumberAddition, street, zip, image, price, bathrooms, bedrooms, size, description, constructionYear, hasGarage, id = null, apiKey = store.key) {
   if (validateInputs([street, houseNumber, zip, city, image, price, size, hasGarage, bedrooms, bathrooms, constructionYear, description])) {
-    return postHouse(city, houseNumber, houseNumberAddition, street, zip, image, price, bathrooms, bedrooms, size, description, constructionYear, hasGarage, id);
+    return postHouse(city, houseNumber, houseNumberAddition, street, zip, image, price, bathrooms, bedrooms, size, description, constructionYear, hasGarage, id, apiKey);
   } else alert('Something went wrong')
 }
 </script>
@@ -116,21 +116,21 @@ function postFormData(city, houseNumber, houseNumberAddition, street, zip, image
 
       <div class="flex w-100 flex-end">
         <button class="uppercase" @click.prevent="postFormData(
-      city,
-      houseNumber,
-      houseNumberAddition,
-      street,
-      zip,
-      image,
-      price,
-      bathrooms,
-      bedrooms,
-      size,
-      description,
-      constructionYear,
-      hasGarage,
-      id
-    )">
+        city,
+        houseNumber,
+        houseNumberAddition,
+        street,
+        zip,
+        image,
+        price,
+        bathrooms,
+        bedrooms,
+        size,
+        description,
+        constructionYear,
+        hasGarage,
+        id
+      )">
           post
         </button>
       </div>

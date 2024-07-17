@@ -11,7 +11,7 @@ import darkDeleteIcon from "@/assets/images/ic_delete_white@3x.png";
 
 const props = defineProps({
     id: Number,
-    madeByMe: Boolean
+    madeByMe: Boolean,
 })
 
 const store = useUserDataStore();
@@ -22,6 +22,9 @@ const heartColor = ref(store.likedHouses.includes(props.id) ?
         '#ccc');
 
 function deleteListing(id) {
+    if (!storage.key) {
+        router.push({ name: 'home' });
+    }
     deleteHouse(id, storage.key)
         .then((res) => {
             return router.push({ name: 'home' });
