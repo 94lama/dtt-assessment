@@ -40,7 +40,7 @@ const houses = computed(() => JSON.parse(data.value));
 <style scoped>
 .title {
   max-width: var(--width);
-  margin: 50px 0 10px 0;
+  margin: 10px 0;
   justify-content: space-between;
 }
 

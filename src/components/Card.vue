@@ -117,6 +117,7 @@ h2 {
 
 @media screen and (max-width: 600px) {
     .card {
+        max-width: 100%;
         border-radius: 5px;
         margin: 10px 0;
         height: auto;

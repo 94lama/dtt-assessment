@@ -52,7 +52,7 @@ const filteredHouses = computed(() => {
 .title {
     width: 100%;
     max-width: var(--width);
-    margin: 50px 0 10px 0;
+    margin: 10px 0;
     justify-content: space-between;
 }
 
@@ -66,4 +66,4 @@ img {
         justify-content: right;
     }
 }
-</style>@/components/API.vue
+</style>

@@ -178,6 +178,10 @@ button,
   align-items: center
 }
 
+main{
+  padding-bottom: 80px;
+}
+
 .flex {
   display: flex;
 }

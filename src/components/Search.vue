@@ -4,21 +4,43 @@ import searchIcon from '@/assets/images/ic_search@3x.png';
 import deleteSearch from '@/assets/images/ic_delete@3x.png';
 
 defineProps([
-    'search', 'type', 'placeholder',
+    'type', 'placeholder',
 ])
 
 const searchValue = ref('');
+const message = ref(true);
 
+function removeMessage() {
+    message.value = false;
+}
+
+function verifyQuery() {
+    
+    if (searchValue.value.match(regex)) {
+        zip.value = searchValue.value.slice(searchValue.value.search(regex) + 5, 7)
+        const returnSearchValue = searchValue.slice(0, searchValue.value.search(regex));
+        console.log(zip.value)
+        return [returnSearchValue, zip.value]
+    } else return [searchValue, zip.value]
+
+}
 </script>
 
 <template>
     <div class="search-component">
         <img :src="searchIcon" alt="search icon" class="search icon">
-        <input :type="type" :placeholder="placeholder" v-model="searchValue" @keyup="$emit('emitInput', searchValue)">
+        <input :type="type" :placeholder="placeholder" v-model="searchValue" @keyup="() => $emit('emitInput', searchValue)">
         <img v-if="searchValue" :src="deleteSearch" alt="delete icon" @click="() => {
             searchValue = '';
             $emit('emitInput', searchValue)
         }" class="icon delete">
+    </div>
+    <div v-if="!searchValue && message" class="message" @click="removeMessage()">
+        <h3>Search tips:</h3>
+        <p class="smallText">
+            Search for houses by city. You may also search for a specific zip code by adding (without spaces between) ":" followed by the 4 digits of the zip code that you are looking for at the end of your reseach.
+            <br>Click here to remove.
+        </p>
     </div>
 </template>
 
@@ -65,6 +87,19 @@ img {
     align-items: center;
     justify-content: center;
     background-color: var(--tertiary);
+}
+
+.message {
+    position: absolute;
+    translate: 0 60px;
+    border-radius: 10px;
+    background-color: var(--tertiary);
+    padding: 10px;
+    max-width: 280px;
+}
+
+.smallText {
+    font-size: 14px;
 }
 
 @media screen and (max-width: 600px) {

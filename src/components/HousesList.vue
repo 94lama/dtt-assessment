@@ -26,23 +26,41 @@ const hasImage = props.image ?? false;
 const cardSize = props.size ?? 'md';
 
 const searchString = ref('');
+const zipValue = ref();
+const regex = /(:)[\d]{4}[\s][\w]{2}/;
+
 const sortFilter = ref('price');
+
+function hasZipQuery() {
+    const startingQuery = searchString.value.toLowerCase();
+    const match = searchString.value.search(':');
+
+    return match >= 0 ?
+        startingQuery.split(':') :
+        [startingQuery, '']
+}
 
 const filteredHouses = computed(() => {
     if (!props.houses) return [];
 
+    const [query, zip] = hasZipQuery()
+    console.log(query, zip)
+
     // Filtering the results before sorting helps reducing the overall compiling time. 
     // The method includes allows to remove the errors given if searchString is null.
-    return props.houses
-        .filter((house) => house.location.city.toLowerCase().includes(searchString.value))
-        .sort((a, b) => a[sortFilter.value] - b[sortFilter.value]);
+    const sortedFilteredHouses = props.houses
+        .filter(house => house.location.city.toLowerCase().includes(query))
+        .sort((a, b) => a[sortFilter] - b[sortFilter])
+
+    return typeof zip !== 'undefined' ? sortedFilteredHouses
+        .filter((house) => house.location.zip.toLowerCase().includes(zip)) :
+        props.houses
 });
 
-//postHouse('');
 </script>
 
 <template>
-    <div class="flex column container">
+    <div class="flex column">
         <div v-if="hasFilter" class="queries flex between">
             <Search @emitInput="(value) => searchString = value" type="text" placeholder="Search for a house" />
             <Sort @emitSorter="(value) => sortFilter = value" />
@@ -66,15 +84,6 @@ const filteredHouses = computed(() => {
 </template>
 
 <style scoped>
-.contaier{
-    width: 100%;
-    max-width: var(--width);
-}
-
-.title {
-    justify-content: space-between;
-}
-
 img {
     max-width: 500px;
     width: 100%;
@@ -96,12 +105,10 @@ img {
 }
 
 @media screen and (max-width: 600px) {
-    .title {
-        justify-content: right;
-    }
-
     .queries {
         flex-direction: column;
+        width: 100%;
+        max-width: 100%;
     }
 }
-</style>@/components/API.vue
+</style>
