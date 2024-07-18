@@ -92,6 +92,7 @@ function toggleHouse(id) {
 
 .alert {
     width: 400px;
+    max-width: var(--width);
     padding: 50px 150px;
     background-color: var(--background2);
     border-radius: 10px;
@@ -111,6 +112,11 @@ function toggleHouse(id) {
         width: 12px;
         padding: 0;
         margin: 0;
+    }
+
+    .alert{
+        width: 60%;
+        padding: 50px
     }
 }
 </style>

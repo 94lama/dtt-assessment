@@ -24,7 +24,7 @@ const imageValue = ref();
 function loadImage(event) {
     emit('updateImage', event.target.files[0])
     value.value = URL.createObjectURL(event.target.files[0])
-    imageValue = event.target.files[0]
+    imageValue.value = event.target.files[0]
 }
 
 // Methods for the boolean input
@@ -75,8 +75,8 @@ img {
     object-fit: contain;
 }
 
-.img-house {
-    height: 100px;
+.img-house{
+    height: 150px;
 }
 
 .img-label {

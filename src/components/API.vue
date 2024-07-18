@@ -2,23 +2,8 @@
 import axios from 'axios';
 import { useFetch } from '@vueuse/core';
 import router from '@/router';
-import { useRouter } from 'vue-router';
 
 axios.defaults.headers.common['Accept'] = 'application/json, text/plain, */*';
-
-/* export function getHouses(key) {
-    if (typeof key === 'undefined' || !key){
-        return router.push({ name: 'home' });
-    }
-    
-    axios.get('https://api.intern.d-tt.nl/api/houses', {
-        headers: { 'X-Api-Key': key }
-    })
-    .then(response => {
-        console.log(response.data)
-        return response.data
-    })
-} */
 
 export async function getHouse(id, apiKey) {
     if (typeof apiKey === 'undefined' || !apiKey){
@@ -73,6 +58,8 @@ function postImage(id, image, apiKey) {
 }
 
 export function deleteHouse(id, apiKey) {
+
+
     try{
         axios.delete(`https://api.intern.d-tt.nl/api/houses/${id}`, {
             headers: {'X-Api-Key': apiKey}
