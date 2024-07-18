@@ -31,7 +31,7 @@ const houses = computed(() => JSON.parse(data.value));
     <div class="flex w-100 align-center no-wrap title">
       <h1 :class="screenWidth <= 600 ? 'm-auto' : ''">Houses</h1>
       <RouterLink  v-if="screenWidth > 600" to="/house/create" class="button uppercase"><img :src="addSymbol" alt="add"> Create new</RouterLink>
-      <RouterLink v-else to="/house/create"><img :src="store.mode === 'light' ? addSymbol : addSymbolGrey" alt="add"></RouterLink>
+      <RouterLink v-else to="/house/create"><img :src="store.mode === 'light' ? addSymbolGrey : addSymbol" alt="add"></RouterLink>
     </div>
     <HousesList :title="'Houses'" :houses="houses" filter="true" image="true" />
   </main>
