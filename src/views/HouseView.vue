@@ -18,7 +18,7 @@ import bathIcon from '@/assets/images/ic_bath@3x.png';
 import garageIcon from '@/assets/images/ic_garage@3x.png';
 import defaultImage from '@/assets/images/img_placeholder_house@3x.png';
 import backArrow from '@/assets/images/ic_back_grey@3x.png';
-import backArrowWhite from '@/assets/images/ic_back_grey@3x.png';
+import backArrowWhite from '@/assets/images/ic_back_white@3x.png';
 
 const store = useUserDataStore();
 const chronologyStore = useChronologyStore();
@@ -53,6 +53,9 @@ const recommendedHouses = computed(() =>
     .slice(0, 3)
 )
 
+const previouslyViewedHouses = computed(() => houses.value.filter(house => chronologyStore.chronology.includes(house.id))
+)
+
 </script>
 
 <template>
@@ -84,9 +87,11 @@ const recommendedHouses = computed(() =>
         </div>
       </div>
     </div>
-    <div class="flex column recommended">
-      <h2>Recommended for you</h2>
-      <HousesList title="Recommended for you" :houses="recommendedHouses" class="recommended" size="sm"></HousesList>
+    <div class="flex column sideList">
+      <h2 v-if="chronologyStore.chronology">House chronology</h2>
+      <HousesList class="list" v-if="chronologyStore.chronology" :houses="previouslyViewedHouses" size="sm"></HousesList>
+      <h2>You may find interesting:</h2>
+      <HousesList class="list" :houses="recommendedHouses" size="sm"></HousesList>
     </div>
   </div>
   <div v-else>{{ error }}</div>
@@ -131,15 +136,19 @@ const recommendedHouses = computed(() =>
   width: 70%;
 }
 
-.recommended {
+.sideList {
   width: 30%;
   margin: 30px 0 60px 0;
 }
 
+.list{
+  padding: 0;
+}
+
 @media screen and (max-width: 600px) {
-  .container{
+  .container {
     flex-direction: column;
-  } 
+  }
 
   .house {
     width: 100%;
@@ -148,6 +157,6 @@ const recommendedHouses = computed(() =>
   .recommended {
     width: 100%;
   }
-  
+
 }
 </style>

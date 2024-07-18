@@ -278,6 +278,12 @@ button,
   color: var(--text-primary);
 }
 
+@media screen and (max-width: 1600px) {
+  :root{
+      --width: 800px;
+  }
+}
+
 @media screen and (max-width: 600px) {
   :root {
     background-color: var(--background1);

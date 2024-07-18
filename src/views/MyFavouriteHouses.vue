@@ -5,6 +5,9 @@ import { RouterLink } from 'vue-router';
 import { useUserDataStore } from '@/stores/userData';
 import HousesList from '@/components/HousesList.vue';
 
+import addSymbol from '@/assets/images/ic_plus_white@3x.png';
+import addSymbolGrey from '@/assets/images/ic_plus_grey@3x.png';
+
 const store = useUserDataStore();
 const screenWidth = window.innerWidth;
 
@@ -26,21 +29,23 @@ const houses = computed(() => JSON.parse(data.value));
 // The method includes allows to remove the errors given if searchString is null.
 const filteredHouses = computed(() => {
     return houses.value
-            .filter((house) => store.likedHouses.includes(house.id))
+        .filter((house) => store.likedHouses.includes(house.id))
 });
 
 //postHouse('');
 </script>
 
 <template>
-    <div class="flex w-100 align-center no-wrap title">
-        <h1 :class="screenWidth <= 600 ? 'm-auto' : ''">{{filter === 'madeByMe' ? 'My houses: ' : 'My favourite houses: '}}</h1>
-        <RouterLink to="/house/create" class="button uppercase" v-if="screenWidth > 768"><img :src="store.mode === 'light' ? addSymbol : addSymbolGrey" class="icon"> Create new</RouterLink>
-        <RouterLink v-else to="/house/create"><img :src="store.mode === 'light' ? addSymbol : addSymbolGrey" class="icon"></RouterLink>
-    </div>
-    <div v-if="isFetching">Loading...</div>
-    <HousesList v-else-if="data" :title="'My Favourite Houses'" :houses="filteredHouses" filter="true" image="true" />
-    <div v-else>{{ error }}</div>
+    <main>
+        <div class="flex w-100 align-center no-wrap title">
+            <h1 :class="screenWidth <= 600 ? 'm-auto' : ''">Houses</h1>
+            <RouterLink v-if="screenWidth > 600" to="/house/create" class="button uppercase"><img :src="addSymbol" alt="add"> Create new</RouterLink>
+            <RouterLink v-else to="/house/create"><img :src="store.mode === 'light' ? addSymbol : addSymbolGrey" alt="add"></RouterLink>
+        </div>
+        <div v-if="isFetching">Loading...</div>
+        <HousesList v-else-if="data" :title="'My Favourite Houses'" :houses="filteredHouses" filter="true" image="true" />
+        <div v-else>{{ error }}</div>
+    </main>
 </template>
 
 <style scoped>
@@ -52,15 +57,8 @@ const filteredHouses = computed(() => {
 }
 
 img {
-    max-width: 500px;
-    width: 100%;
-    margin: 100px 0 60px 0;
-}
-
-.icon {
-    height: 15px;
-    width: 15px;
-    margin: 0;
+    width: 20px;
+    height: 20px;
 }
 
 @media screen and (max-width: 600px) {

@@ -22,10 +22,10 @@ const heartColor = ref(store.likedHouses.includes(props.id) ?
         '#ccc');
 
 function deleteListing(id) {
-    if (!storage.key) {
+    if (!store.key) {
         router.push({ name: 'home' });
     }
-    deleteHouse(id, storage.key)
+    deleteHouse(id, store.key)
         .then((res) => {
             return router.push({ name: 'home' });
         })

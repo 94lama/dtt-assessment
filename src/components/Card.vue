@@ -55,9 +55,9 @@ const props = defineProps({
     background-color: var(--background2);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
     margin: 15px 0;
-    width: var(--width);
+    width: 100%;
+    max-width: var(--width);
     height: 240px;
-    max-width: 100%;
 }
 
 .image {
@@ -119,7 +119,6 @@ h2 {
     .card {
         border-radius: 5px;
         margin: 10px 0;
-        width: 100%;
         height: auto;
     }
 

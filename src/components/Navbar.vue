@@ -46,7 +46,7 @@ nav {
     top: 0;
     left: 0;
     height: 80px;
-    width: 100%;
+    width: 100vw;
     background-color: var(--background2);
     justify-content: center;
     align-items: center;
@@ -54,7 +54,8 @@ nav {
 }
 
 .navbar {
-    width: var(--width);
+    width: 100%;
+    max-width: var(--width);
     height: 45px;
     display: flex;
     justify-content: space-between;

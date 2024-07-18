@@ -42,28 +42,35 @@ const filteredHouses = computed(() => {
 </script>
 
 <template>
-    <div v-if="hasFilter" class="queries flex between">
-        <Search @emitInput="(value) => searchString = value" type="text" placeholder="Search for a house" />
-        <Sort @emitSorter="(value) => sortFilter = value" />
-    </div>
-    <div v-if="hasImage && filteredHouses.length === 0" class="flex column center">
-        <img :src="noResultsImage" alt="no results image">
-        <h3 v-if="hasFilter && searchString">No houses found<br></br>
-            Please try another keyword.</h3>
-        <h3 v-else>No houses found</h3>
-    </div>
-    <div v-if="filteredHouses.length > 0 && searchString" class="align-left text-left">
-        <h3>
-            {{ filteredHouses.length }} results found
-        </h3>
-    </div>
-    <div class="flex column center">
-        <Card v-for="house in filteredHouses" :id="house.id" :key="house.id" :image="house.image" :price="house.price" :rooms="house.rooms" :size="house.size" :description="house.description" :location="house.location" :constructionYear="house.constructionYear" :hasGarage="house.hasGarage" :madeByMe="house.madeByMe" :cardSize="cardSize">
-        </Card>
+    <div class="flex column container">
+        <div v-if="hasFilter" class="queries flex between">
+            <Search @emitInput="(value) => searchString = value" type="text" placeholder="Search for a house" />
+            <Sort @emitSorter="(value) => sortFilter = value" />
+        </div>
+        <div v-if="hasImage && filteredHouses.length === 0" class="flex column align-center">
+            <img :src="noResultsImage" alt="no results image">
+            <h3 v-if="hasFilter && searchString">No houses found<br></br>
+                Please try another keyword.</h3>
+            <h3 v-else>No houses found</h3>
+        </div>
+        <div v-if="filteredHouses.length > 0 && searchString" class="align-left text-left">
+            <h3>
+                {{ filteredHouses.length }} results found
+            </h3>
+        </div>
+        <div class="flex column align-center">
+            <Card v-for="house in filteredHouses" :id="house.id" :key="house.id" :image="house.image" :price="house.price" :rooms="house.rooms" :size="house.size" :description="house.description" :location="house.location" :constructionYear="house.constructionYear" :hasGarage="house.hasGarage" :madeByMe="house.madeByMe" :cardSize="cardSize">
+            </Card>
+        </div>
     </div>
 </template>
 
 <style scoped>
+.contaier{
+    width: 100%;
+    max-width: var(--width);
+}
+
 .title {
     justify-content: space-between;
 }
