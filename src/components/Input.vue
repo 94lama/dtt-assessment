@@ -60,6 +60,10 @@ function toggleBoolean() {
 </template>
 
 <style scoped>
+textarea{
+    height: 120px !important;
+}
+
 label {
     text-transform: lowercase;
     color: var(--black);

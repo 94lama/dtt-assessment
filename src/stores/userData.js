@@ -3,10 +3,11 @@ import { defineStore } from 'pinia'
 
 export const useUserDataStore = defineStore('key', () => {
   /* API-Key */
-  const key = ref('');
+  const key = ref(localStorage.getItem('key') ? localStorage.getItem('key') : '');
 
   function update(value) {
-    key.value = value
+    localStorage.setItem('key', value);
+    key.value = value;
   }
 
   /* Screen mode (dark/light) */
